@@ -21,7 +21,6 @@ module.exports = {
   },
   ignoreFiles: [
     '**/coverage/**',
-    '**/dist/**',
-    '** /node_modules/**',
+    '**/node_modules/**',
   ],
 };
