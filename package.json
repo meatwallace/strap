@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "description": "Javascript monorepo boilerplate",
   "scripts": {
-    "start": "",
+    "start": "npm run start-web",
+    "start-web": "webpack --config web.webpack.config.js",
     "test": "jest --watch --coverage",
     "test-ci": "jest --bail --coverage",
     "lint": "eslint . --fix; stylelint **/*.css"
