@@ -1,0 +1,25 @@
+{
+  "name": "strap",
+  "version": "0.0.0",
+  "description": "Javascript monorepo boilerplate",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/meatwallace/strap.git"
+  },
+  "author": "Geoff Whatley",
+  "license": "MIT",
+  "homepage": "https://github.com/meatwallace/strap#readme",
+  "devDependencies": {
+    "commitizen": "^2.9.5",
+    "cz-conventional-changelog": "^1.2.0"
+  },
+  "dependencies": {},
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}

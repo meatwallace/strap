@@ -1,0 +1,11 @@
+# Folders
+.idea
+.vscode
+coverage
+dist
+node_modules
+
+# Files
+.DS_Store
+npm-debug.log
+yarn-error.log
