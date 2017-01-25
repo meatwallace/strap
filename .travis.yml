@@ -8,3 +8,6 @@ script:
   - "npm run test-ci"
   - "yarn global add codeclimate-test-reporter"
   - "codeclimate-test-reporter < ./coverage/lcov.info"
+addons:
+  code_climate:
+    repo_token: a4e4ca16789d6c0af6f80b9119febb6e385a3bfe437ed5f28a10c84e05789961
