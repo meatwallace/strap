@@ -18,6 +18,26 @@ module.exports = function config() {
           'css-loader?modules&importLoaders=1',
           'postcss-loader',
         ],
+      }, {
+        test: /\.svg$/,
+        loader: 'svg-url-loader',
+        include: /img/,
+      }, {
+        test: /\.woff$/,
+        loader: 'url-loader?mimetype=application/font-woff',
+        include: /fonts/,
+      }, {
+        test: /\.woff2$/,
+        loader: 'url-loader?mimetype=application/font-woff2',
+        include: /fonts/,
+      },
+      { test: /\.[ot]tf$/,
+        loader: 'url-loader?mimetype=application/octet-stream',
+        include: /fonts/,
+      },
+      { test: /\.eot$/,
+        loader: 'url-loader?mimetype=application/vnd.ms-fontobject',
+        include: /fonts/,
       }],
     },
     output: {
@@ -31,6 +51,8 @@ module.exports = function config() {
     resolve: {
       alias: {
         '~': resolve(__dirname, '../src/common'),
+        fonts: resolve(__dirname, '../fonts'),
+        img: resolve(__dirname, '../img'),
       },
     },
   };
