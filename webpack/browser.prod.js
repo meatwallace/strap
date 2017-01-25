@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
+import HTMLWebpackPlugin from 'html-webpack-plugin';
 import base from './browser.base';
 import { presets } from './constants';
 
@@ -30,6 +31,7 @@ module.exports = function config() {
         },
       }),
       new webpack.optimize.UglifyJsPlugin(),
+      new HTMLWebpackPlugin({ filename: '200.html' }),
     ],
   };
 
