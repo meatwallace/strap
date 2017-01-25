@@ -21,7 +21,6 @@ module.exports = function config() {
       }],
     },
     output: {
-      filename: 'main.js',
       path: resolve(__dirname, '../dist/browser'),
       publicPath: '/',
     },

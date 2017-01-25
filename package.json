@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npm run build:browser:dev",
     "build:browser:dev": "webpack-dev-server --env 'browser.dev'",
+    "build:browser:prod": "webpack --env 'browser.prod'",
     "test": "jest --watch --coverage",
     "test-ci": "jest --bail --coverage",
     "lint": "eslint . --fix; stylelint **/*.css",

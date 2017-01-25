@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import base from './browser.base';
+import { presets } from './constants';
 
 const PORT = 3000;
 
@@ -26,18 +27,15 @@ module.exports = function config() {
         exclude: /node_modules/,
         loader: 'babel-loader',
         options: {
-          presets: [
-            ['es2015', { modules: false }],
-            'es2016',
-            'es2017',
-            'stage-0',
-            'react',
-          ],
+          presets,
           plugins: [
             'react-hot-loader/babel',
           ],
         },
       }],
+    },
+    output: {
+      filename: '[name].bundle.js',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
