@@ -4,7 +4,7 @@
   "description": "Javascript monorepo boilerplate",
   "scripts": {
     "start": "npm run start-web",
-    "start-web": "webpack --config web.webpack.config.js",
+    "start-web": "webpack --config config/build/webpack.browser.dev.babel.js",
     "test": "jest --watch --coverage",
     "test-ci": "jest --bail --coverage",
     "lint": "eslint . --fix; stylelint **/*.css"
@@ -26,7 +26,6 @@
     "babel-preset-es2017": "^6.16.0",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-0": "^6.3.13",
-    "babel-root-import": "^4.1.4",
     "commitizen": "^2.9.5",
     "css-loader": "^0.26.0",
     "cz-conventional-changelog": "^1.2.0",
@@ -63,6 +62,13 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^~(.*)$": "<rootDir>/src/common$1",
+      "^.+\\.(jpg|jpeg|png|gif|svg)$": "<rootDir>/config/jest/fileTransform.js",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js"
     }
   }
 }

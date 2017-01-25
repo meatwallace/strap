@@ -4,13 +4,12 @@ module.exports = function init(wallaby) {
   return {
     name: 'strap',
     files: [
-      '**/src/**/*.js',
-      '!**/src/**/__tests__/*.js',
-      '!node_modules/**/*',
+      'package.json',
+      'src/**/*.js',
+      '!src/**/__tests__/*.js',
     ],
     tests: [
-      '**/src/**/__tests__/*.js',
-      '!node_modules/**/*',
+      'src/**/__tests__/*.js',
     ],
     env: {
       type: 'node',
@@ -20,12 +19,10 @@ module.exports = function init(wallaby) {
       '**/*.js': wallaby.compilers.babel(),
     },
     setup: (wall) => {
-      wall.testFramework.configure({
-        moduleNameMapper: {
-          '^.+\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/config/jest/fileTransform.js',
-          '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
-        },
-      });
+      // eslint-disable-next-line global-require
+      const config = require('./package.json').jest;
+
+      wall.testFramework.configure(config);
     },
     testFramework: 'jest',
   };
