@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "description": "Javascript monorepo boilerplate",
   "scripts": {
-    "start": "npm run start-web",
-    "start-web": "webpack-dev-server --config config/build/webpack.browser.dev.babel.js",
+    "start": "npm run build:browser:dev",
+    "build:browser:dev": "webpack-dev-server --env 'browser.dev'",
     "test": "jest --watch --coverage",
     "test-ci": "jest --bail --coverage",
-    "lint": "eslint . --fix; stylelint **/*.css"
+    "lint": "eslint . --fix; stylelint **/*.css",
+    "help": "webpack --help"
   },
   "repository": {
     "type": "git",
@@ -51,7 +52,8 @@
     "svg-url-loader": "^1.1.0",
     "url-loader": "^0.5.7",
     "webpack": "^2.2.0",
-    "webpack-dev-server": "^2.2.0"
+    "webpack-dev-server": "^2.2.0",
+    "webpack-merge": "^2.4.0"
   },
   "dependencies": {
     "apollo-client": "^0.8.0",

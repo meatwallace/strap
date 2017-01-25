@@ -1,19 +1,18 @@
 import webpack from 'webpack';
-import HTMLWebpackPlugin from 'html-webpack-plugin';
-import { resolve } from 'path';
+import merge from 'webpack-merge';
+import base from './browser.base';
 
 const PORT = 3000;
-const PATH = '/';
 
 module.exports = function config() {
-  return {
-    context: resolve(__dirname, '../../src/browser'),
+  const baseConfig = base();
+  const devConfig = {
     devtool: 'inline-source-map',
     devServer: {
       historyApiFallback: true,
       hot: true,
       port: PORT,
-      publicPath: PATH,
+      publicPath: '/',
     },
     entry: [
       'react-hot-loader/patch',
@@ -38,34 +37,17 @@ module.exports = function config() {
             'react-hot-loader/babel',
           ],
         },
-      }, {
-        test: /\.(graphql|gql)$/,
-        exclude: /node_modules/,
-        loader: 'graphql-tag/loader',
-      }, {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        loaders: [
-          'style-loader',
-          'css-loader?modules&importLoaders=1',
-          'postcss-loader',
-        ],
       }],
-    },
-    output: {
-      filename: 'main.js',
-      path: resolve(__dirname, '../../dist/browser'),
-      publicPath: PATH,
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.NamedModulesPlugin(),
-      new HTMLWebpackPlugin(),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('development'),
+        },
+      }),
     ],
-    resolve: {
-      alias: {
-        '~': resolve(__dirname, '../../src/common'),
-      },
-    },
   };
+
+  return merge(baseConfig, devConfig);
 };
