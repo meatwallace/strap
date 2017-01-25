@@ -2,32 +2,25 @@ import webpack from 'webpack';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
 import { resolve } from 'path';
 
+const PORT = 3000;
+const PATH = '/';
+
 module.exports = function config() {
   return {
     context: resolve(__dirname, '../../src/browser'),
-    entry: [
-      'react-hot-loader/patch',
-      'webpack-dev-server/client?http://localhost:3000',
-      'webpack/hot/only-dev-server',
-      './index.js',
-    ],
-    output: {
-      filename: 'main.js',
-      path: resolve(__dirname, '../../dist/browser'),
-      publicPath: '/',
-    },
     devtool: 'inline-source-map',
     devServer: {
       historyApiFallback: true,
       hot: true,
-      port: 3000,
-      publicPath: '/',
+      port: PORT,
+      publicPath: PATH,
     },
-    resolve: {
-      alias: {
-        '~': resolve(__dirname, '../../src/common'),
-      },
-    },
+    entry: [
+      'react-hot-loader/patch',
+      `webpack-dev-server/client?http://localhost:${PORT}`,
+      'webpack/hot/only-dev-server',
+      './index.js',
+    ],
     module: {
       rules: [{
         test: /\.js$/,
@@ -54,10 +47,20 @@ module.exports = function config() {
         ],
       }],
     },
+    output: {
+      filename: 'main.js',
+      path: resolve(__dirname, '../../dist/browser'),
+      publicPath: PATH,
+    },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
       new webpack.NamedModulesPlugin(),
       new HTMLWebpackPlugin(),
     ],
+    resolve: {
+      alias: {
+        '~': resolve(__dirname, '../../src/common'),
+      },
+    },
   };
 };
