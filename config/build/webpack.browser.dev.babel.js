@@ -24,8 +24,8 @@ module.exports = function config() {
     module: {
       rules: [{
         test: /\.js$/,
-        loader: 'babel-loader',
         exclude: /node_modules/,
+        loader: 'babel-loader',
         options: {
           presets: [
             ['es2015', { modules: false }],
@@ -39,7 +39,12 @@ module.exports = function config() {
           ],
         },
       }, {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+      }, {
         test: /\.css$/,
+        exclude: /node_modules/,
         loaders: [
           'style-loader',
           'css-loader?modules&importLoaders=1',
