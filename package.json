@@ -4,7 +4,7 @@
   "description": "Javascript monorepo boilerplate",
   "scripts": {
     "start": "npm run start-web",
-    "start-web": "webpack --config config/build/webpack.browser.dev.babel.js",
+    "start-web": "webpack-dev-server --config config/build/webpack.browser.dev.babel.js",
     "test": "jest --watch --coverage",
     "test-ci": "jest --bail --coverage",
     "lint": "eslint . --fix; stylelint **/*.css"
@@ -41,7 +41,6 @@
     "postcss-cssnext": "^2.9.0",
     "postcss-import": "^9.1.0",
     "postcss-loader": "^1.1.1",
-    "postcss-modules": "^0.6.3",
     "react-addons-test-utils": "^15.3.2",
     "react-hot-loader": "^3.0.0-beta.6",
     "sinon": "^1.17.6",

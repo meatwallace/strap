@@ -1,0 +1,10 @@
+.container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.greeting {
+  color: #333;
+  font-family: sans-serif;
+}
