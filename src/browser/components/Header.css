@@ -1,0 +1,14 @@
+/**
+ * 1: https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer
+ */
+.container {
+  flex: none; /* 1 */
+  padding: 0 40px;
+}
+
+.title {
+  font-family: 'Roboto Condensed';
+  font-size: ms(2) rem;
+  font-weight: 400;
+  text-align: right;
+}

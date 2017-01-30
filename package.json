@@ -8,7 +8,7 @@
     "build:browser:prod": "webpack --env 'browser.prod'",
     "test": "jest --watch --coverage",
     "test-ci": "jest --bail --coverage",
-    "lint": "eslint . --fix; stylelint **/*.css",
+    "lint": "eslint ./src --fix; stylelint ./src/**/*.css",
     "help": "webpack --help"
   },
   "repository": {
@@ -59,15 +59,21 @@
   "dependencies": {
     "apollo-client": "^0.8.0",
     "graphql-tag": "^1.2.3",
+    "history": "^4.5.1",
     "immutable": "^3.8.1",
     "lodash": "^4.17.4",
+    "postcss-modular-scale": "^2.5.2",
     "react": "^15.4.2",
     "react-apollo": "^0.8.3",
     "react-dom": "^15.4.2",
+    "react-helmet": "^4.0.0",
     "react-redux": "^5.0.2",
+    "react-router": "^4.0.0-alpha.6",
+    "react-router-addons-controlled": "^0.0.1",
     "redux": "^3.6.0",
     "redux-immutable": "^3.0.10",
-    "redux-logger": "^2.7.4"
+    "redux-logger": "^2.7.4",
+    "sanitize.css": "^4.1.0"
   },
   "config": {
     "commitizen": {

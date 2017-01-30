@@ -1,1 +1,1 @@
-export { default as formatName } from './formatName';
+export const lowerCase = s => s.toLowerCase();

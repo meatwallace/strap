@@ -19,9 +19,4 @@ module.exports = {
     'string-quotes': 'single',
     'value-no-vendor-prefix': true,
   },
-  ignoreFiles: [
-    '**/coverage/**',
-    '**/dist/**',
-    '**/node_modules/**',
-  ],
 };
