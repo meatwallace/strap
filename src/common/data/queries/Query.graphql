@@ -1,0 +1,10 @@
+#import '../types/Todo.graphql'
+#import '../types/User.graphql'
+
+type Query {
+  viewer: User
+  author(username: String!): User
+  authors: [User]
+  todos: [Todo]
+  todo(_id: String!): Todo
+}

@@ -1,7 +1,9 @@
 import authentication from 'feathers-authentication';
 
 export default function auth() {
-  const config = this.get('auth');
+  const app = this;
 
-  this.configure(authentication(config));
+  const config = app.get('auth');
+
+  app.configure(authentication(config));
 }

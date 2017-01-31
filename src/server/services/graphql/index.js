@@ -1,21 +1,21 @@
-import { apolloExpress, graphiqlExpress } from 'apollo-server';
+import bodyParser from 'body-parser';
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import { print } from 'graphql-tag/printer';
-// import Resolvers from  './resolvers';
-import schema from '~/data/schema.graphql';
-// import { before, after } from './hooks';
+import { schema, resolvers } from '~/data';
 
+const GRAPHQL = '/graphql';
+const GRAPHIQL = '/graphiql';
 
-export default function initService() {
+export default function init() {
   const app = this;
 
   const executableSchema = makeExecutableSchema({
     typeDefs: [print(schema)],
-    // resolvers: Resolvers.call(app),
+    resolvers: resolvers(app),
   });
 
-  // Initialize our service with any options it requires
-  app.use('/graphql', apolloExpress((req) => {
+  app.use(GRAPHQL, bodyParser.json(), graphqlExpress((req) => {
     const { token, provider } = req.feathers;
 
     return {
@@ -27,7 +27,5 @@ export default function initService() {
     };
   }));
 
-  app.use('/graphiql', graphiqlExpress({
-    endpointURL: '/graphql',
-  }));
+  app.use(GRAPHIQL, graphiqlExpress({ endpointURL: GRAPHQL }));
 }

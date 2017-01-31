@@ -7,6 +7,7 @@ import hooks from 'feathers-hooks';
 import rest from 'feathers-rest';
 import socketio from 'feathers-socketio';
 import { join } from 'path';
+// import favicon from 'serve-favicon';
 import { APP_NAME } from '~/configs/app';
 import middleware from './middleware';
 import services from './services';
@@ -20,6 +21,8 @@ app
   .use(cors())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
+  // .use(favicon(join(app.get('public'), 'favicon.ico')))
+  .use('/', feathers.static(app.get('public')))
   .configure(hooks())
   .configure(rest())
   .configure(socketio())

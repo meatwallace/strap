@@ -1,18 +1,18 @@
 import service from 'feathers-waterline';
-import User from './model';
+import Model from './model';
 import { before, after } from './hooks';
 import ORM from '../configs/orm';
 
-const ENDPOINT = '/users';
+const ENDPOINT = '/todos';
 
-// TODO: Requires get, find, create
+// TODO: Requires find, remove, get, patch
 export default function init() {
   const app = this;
 
-  ORM.loadCollection(User);
+  ORM.loadCollection(Model);
 
   const options = {
-    Model: User,
+    Model,
     paginate: {
       default: 5,
       max: 25,
@@ -21,8 +21,8 @@ export default function init() {
 
   app.use(ENDPOINT, service(options));
 
-  const userService = app.service(ENDPOINT);
+  const todoService = app.service(ENDPOINT);
 
-  userService.before(before);
-  userService.after(after);
+  todoService.before(before);
+  todoService.after(after);
 }

@@ -4,5 +4,6 @@ type Todo {
   _id: String!
   content: String!
   createdAt: String
+  updatedAt: String
   author: User
 }

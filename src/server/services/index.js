@@ -3,6 +3,7 @@ import ORM from './configs/orm';
 import auth from './authentication';
 import graphql from './graphql';
 import user from './user';
+import viewer from './viewer';
 
 export default function services() {
   const app = this;
@@ -29,11 +30,12 @@ export default function services() {
     if (err) {
       console.log(err);
     } else {
-      console.log('Waterline:: Connected to MongoDB');
+      console.log('Waterline connected to MongoDB');
     }
-
-    app.configure(auth);
-    app.configure(graphql);
-    app.configure(user);
   });
+
+  app.configure(auth);
+  app.configure(user);
+  app.configure(viewer);
+  app.configure(graphql);
 }
