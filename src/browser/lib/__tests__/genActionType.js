@@ -1,5 +1,5 @@
+import { APP_NAME } from '~/configs/app';
 import genActionType from '../genActionType';
-import { APP_NAME } from '../../configs/app';
 
 describe('genActionType', () => {
   it('should accept 2 string params', () => {

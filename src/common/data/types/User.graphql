@@ -1,0 +1,7 @@
+#import './Todo.graphql'
+
+type User {
+  _id: String!
+  username: String!
+  Todos: [Todo]
+}

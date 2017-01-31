@@ -1,0 +1,24 @@
+#import './types/AuthPayload.graphql'
+#import './types/Todo.graphql'
+#import './types/User.graphql'
+#import './inputs/todo.graphql'
+
+type Mutation {
+  signUp (
+    username: String!
+    password: String!
+  ): User
+
+  logIn (
+    username: String!
+    password: String!
+  ): AuthPayload
+
+  createTodo (
+    Todo: TodoInput
+  ): Todo
+
+  removeTodo (
+    _id: String!
+  ): Todo
+}

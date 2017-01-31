@@ -7,5 +7,6 @@ node_modules
 
 # Files
 .DS_Store
-npm-debug.log
-yarn-error.log
+*.log
+settings.dev.js
+settings.prod.js

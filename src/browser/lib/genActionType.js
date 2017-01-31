@@ -1,4 +1,4 @@
-import { APP_NAME } from '../configs/app';
+import { APP_NAME } from '~/configs/app';
 
 export default function genActionType(scope, action) {
   if (typeof scope !== 'string' || typeof action !== 'string') {

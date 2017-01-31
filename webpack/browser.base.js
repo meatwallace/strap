@@ -1,16 +1,15 @@
-import webpack from 'webpack';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
+import merge from 'webpack-merge';
 import { resolve } from 'path';
+import universalBase from './universal.babel';
 
 module.exports = function config() {
-  return {
+  const universalConfig = universalBase();
+  const browserConfig = {
     context: resolve(__dirname, '../src/browser'),
     module: {
       rules: [{
-        test: /\.(graphql|gql)$/,
-        exclude: /node_modules/,
-        loader: 'graphql-tag/loader',
-      }, {
         test: /\.css$/,
         exclude: /node_modules/,
         loaders: [
@@ -50,10 +49,11 @@ module.exports = function config() {
     ],
     resolve: {
       alias: {
-        '~': resolve(__dirname, '../src/common'),
         fonts: resolve(__dirname, '../fonts'),
         img: resolve(__dirname, '../img'),
       },
     },
   };
+
+  return merge(universalConfig, browserConfig);
 };
