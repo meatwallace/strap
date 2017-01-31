@@ -1,14 +1,13 @@
-import mongoose from 'mongoose';
+import { Collection } from 'waterline';
 
-const { Schema } = mongoose;
-
-const userSchema = new Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  createdAt: { type: Date, default: Date.now },
-  updatedAt: { type: Date, default: Date.now },
+export default Collection.extend({
+  identity: 'user',
+  schema: true,
+  model: 'mongoDb',
+  attributes: {
+    email: { type: 'string', required: true, unique: true },
+    password: { type: 'string', required: true },
+    createdAt: { type: 'date', defaultsTo: Date.now },
+    updatedAt: { type: 'date', defaultsTo: Date.now },
+  },
 });
-
-const userModel = mongoose.model('user', userSchema);
-
-export default userModel;

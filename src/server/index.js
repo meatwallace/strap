@@ -35,5 +35,3 @@ app.listen(port, (err) => {
 
   console.log(`${APP_NAME} started on ${app.get('host')}:${port}`);
 });
-
-export default app;

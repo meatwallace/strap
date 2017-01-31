@@ -1,12 +1,17 @@
-import service from 'feathers-mongoose';
-import user from './model';
+import service from 'feathers-waterline';
+import User from './model';
 import { before, after } from './hooks';
+import ORM from '../configs/orm';
+
+const ENDPOINT = '/users';
 
 export default function initService() {
   const app = this;
 
+  ORM.loadCollection(User);
+
   const options = {
-    Model: user,
+    Model: User,
     paginate: {
       default: 5,
       max: 25,
@@ -14,10 +19,10 @@ export default function initService() {
   };
 
   // Initialize our service with any options it requires
-  app.use('/users', service(options));
+  app.use(ENDPOINT, service(options));
 
   // Get our initialize service to that we can bind hooks
-  const userService = app.service('/users');
+  const userService = app.service(ENDPOINT);
 
   // Set up our before hooks
   userService.before(before);
