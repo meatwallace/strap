@@ -7,34 +7,40 @@ import hooks from 'feathers-hooks';
 import rest from 'feathers-rest';
 import socketio from 'feathers-socketio';
 import { join } from 'path';
-// import favicon from 'serve-favicon';
 import { APP_NAME } from '~/configs/app';
 import middleware from './middleware';
 import services from './services';
 
+// Takes a string, pumps it to the console
+const log = message => (console.info(`${APP_NAME}: ${message}`));
+
+// The express app
 const app = feathers();
 
+// Configure our app so our config is accessible
+app.configure(configuration(join(__dirname, '../../config/feathers')));
+
+const isProduction = process.env.NODE_ENV === 'production';
+const port = isProduction ? app.get('port') : 3030;
+const host = isProduction ? app.get('host') : 'localhost';
+
 app
-  .configure(configuration(join(__dirname, '../../config/feathers')))
   .use(compress())
   .options('*', cors())
   .use(cors())
   .use(bodyParser.json())
   .use(bodyParser.urlencoded({ extended: true }))
-  // .use(favicon(join(app.get('public'), 'favicon.ico')))
-  .use('/', feathers.static(app.get('public')))
   .configure(hooks())
   .configure(rest())
   .configure(socketio())
   .configure(services)
   .configure(middleware);
 
-const port = app.get('port');
-
+// Start listening
 app.listen(port, (err) => {
   if (err) {
-    console.log(err);
+    log(err);
   }
 
-  console.log(`${APP_NAME} started on ${app.get('host')}:${port}`);
+  log(`Started server on ${host}:${port}`);
 });

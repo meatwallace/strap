@@ -14,6 +14,10 @@ module.exports = function config() {
       hot: true,
       port: PORT,
       publicPath: '/',
+      proxy: {
+        '/graphql': 'http://localhost:3030',
+        '/graphiql': 'http://localhost:3030',
+      },
     },
     entry: [
       'react-hot-loader/patch',
