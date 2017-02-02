@@ -1,9 +1,12 @@
+// This is only used for react-native
+// We generate our babel config via Webpack for everything else
 {
   "presets": [
-    "es2015",
-    "es2016",
-    "es2017",
-    "stage-0",
-    "react"
-  ]
+    "babel-preset-exponent"
+  ],
+  "env": {
+    "development": {
+      "plugins": ["transform-react-jsx-source"]
+    }
+  }
 }

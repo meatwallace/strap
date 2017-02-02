@@ -2,6 +2,13 @@ import { fromJS } from 'immutable';
 import history from '../../configs/history';
 import reducer, { STATE_KEY, navigate } from '../routing';
 
+jest.mock('history/createBrowserHistory', () => (
+  () => ({
+    location: {},
+    action: 'MOCK_ACTION',
+  })
+));
+
 describe('routing::', () => {
   describe('STATE_KEY::', () => {
     it('should be `routing`', () => {
