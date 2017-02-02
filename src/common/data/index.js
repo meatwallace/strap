@@ -1,2 +1,2 @@
-export { default as resolvers } from './resolvers';
+export { default as resolvers } from './schema';
 export { default as schema } from './schema.graphql';

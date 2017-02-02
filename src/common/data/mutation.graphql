@@ -1,7 +1,7 @@
-#import '../types/AuthPayload.graphql'
-#import '../types/Todo.graphql'
-#import '../types/User.graphql'
-#import '../inputs/todo.graphql'
+#import './models/AuthPayload/authPayload.graphql'
+#import './models/Todo/todo.graphql'
+#import './models/Todo/inputs.graphql'
+#import './models/User/user.graphql'
 
 type Mutation {
   signUp (

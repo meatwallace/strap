@@ -1,18 +1,15 @@
-import service from 'feathers-waterline';
-import Model from './model';
+import service from 'feathers-mongoose';
+import Todo from './model';
 import { before, after } from './hooks';
-import ORM from '../configs/orm';
 
 const ENDPOINT = '/todos';
 
-// TODO: Requires find, remove, get, patch
+// TODO: Requires get, find, create
 export default function init() {
   const app = this;
 
-  ORM.loadCollection(Model);
-
   const options = {
-    Model,
+    Model: Todo,
     paginate: {
       default: 5,
       max: 25,

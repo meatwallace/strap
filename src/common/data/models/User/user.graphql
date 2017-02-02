@@ -1,4 +1,4 @@
-#import './Todo.graphql'
+#import '../Todo/todo.graphql'
 
 type User {
   _id: String!

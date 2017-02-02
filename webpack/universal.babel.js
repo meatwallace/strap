@@ -13,6 +13,7 @@ module.exports = function config() {
     resolve: {
       alias: {
         '~': resolve(__dirname, '../src/common'),
+        '#': resolve(__dirname, '../src/server'),
       },
     },
   };

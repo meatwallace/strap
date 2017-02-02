@@ -14,7 +14,7 @@ export const before = {
   get: [],
   create: [
     ...authed,
-    auth.assosciateCurrentUser({ as: 'authorId' }),
+    auth.associateCurrentUser({ as: 'authorId' }),
   ],
   update: [
     ...authed,

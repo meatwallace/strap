@@ -1,5 +1,5 @@
-#import './mutations/Mutation.graphql'
-#import './queries/Query.graphql'
+#import './mutation.graphql'
+#import './query.graphql'
 
 type schema {
   query: Query

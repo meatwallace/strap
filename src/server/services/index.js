@@ -1,41 +1,26 @@
-import mongoAdapater from 'sails-mongo';
-import ORM from './configs/orm';
+import mongoose from 'mongoose';
 import auth from './authentication';
 import graphql from './graphql';
-import user from './user';
+import todos from './todos';
+import users from './users';
 import viewer from './viewer';
 
 export default function services() {
   const app = this;
 
-  const config = {
-    adapters: {
-      default: mongoAdapater,
-      mongo: mongoAdapater,
-    },
-    connections: {
-      mongoDb: {
-        adapter: 'mongo',
-        ssl: true,
-        sslValidate: false,
-        url: app.get('mongodb'),
-      },
-    },
-    defaults: {
-      migrate: 'alter',
-    },
-  };
-
-  ORM.initialize(config, (err) => {
+  mongoose.connect(app.get('mongodb'), { mongos: true }, (err) => {
     if (err) {
       console.log(err);
     } else {
-      console.log('Waterline connected to MongoDB');
+      console.log('Mongoose connected to MongoDB');
     }
   });
 
+  mongoose.Promise = global.Promise;
+
   app.configure(auth);
-  app.configure(user);
+  app.configure(users);
+  app.configure(todos);
   app.configure(viewer);
   app.configure(graphql);
 }

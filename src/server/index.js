@@ -1,7 +1,6 @@
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import cors from 'cors';
-import feathers from 'feathers';
 import configuration from 'feathers-configuration';
 import hooks from 'feathers-hooks';
 import rest from 'feathers-rest';
@@ -10,12 +9,10 @@ import { join } from 'path';
 import { APP_NAME } from '~/configs/app';
 import middleware from './middleware';
 import services from './services';
+import app from './app';
 
 // Takes a string, pumps it to the console
 const log = message => (console.info(`${APP_NAME}: ${message}`));
-
-// The express app
-const app = feathers();
 
 // Configure our app so our config is accessible
 app.configure(configuration(join(__dirname, '../../config/feathers')));

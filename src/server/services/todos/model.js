@@ -1,13 +1,10 @@
-import { Collection } from 'waterline';
+import mongoose from 'mongoose';
 
-export default Collection.extend({
-  identity: 'todo',
-  schema: true,
-  connection: 'mongoDb',
-  attributes: {
-    author: { model: 'user' },
-    content: { type: 'string', required: true },
-    createdAt: { type: 'date', defaultsTo: Date.now },
-    updatedAt: { type: 'date', defaultsTo: Date.now },
-  },
+const Todo = new mongoose.Schema({
+  author: { type: String, required: true },
+  content: { type: String, required: true },
+  createdAt: { type: String, default: Date.now },
+  updatedAt: { type: String, default: Date.now },
 });
+
+export default mongoose.model('Todo', Todo);

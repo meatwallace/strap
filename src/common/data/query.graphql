@@ -1,8 +1,8 @@
-#import '../types/Todo.graphql'
-#import '../types/User.graphql'
+#import './models/Todo/todo.graphql'
+#import './models/User/user.graphql'
 
 type Query {
-  viewer: User
+  current: User
   author(username: String!): User
   authors: [User]
   todos: [Todo]

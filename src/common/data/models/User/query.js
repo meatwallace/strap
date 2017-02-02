@@ -1,0 +1,23 @@
+export default function queries(app) {
+  const Users = app.service('users');
+  const Viewer = app.service('viewer');
+
+  return {
+    async author(root, { username }, context) {
+      const query = { username };
+      const users = await Users.find({ query });
+
+      return users[0];
+    },
+    async authors(root, args, context) {
+      const users = await Users.find();
+
+      return users;
+    },
+    async current(root, args, context) {
+      const user = await Viewer.find(context);
+
+      return user;
+    },
+  };
+}
