@@ -66,13 +66,14 @@
     "webpack-merge": "^2.6.1"
   },
   "dependencies": {
+    "@exponent/vector-icons": "~4.0.0",
+    "@shoutem/ui": "^0.10.8",
     "apollo-client": "^0.8.1",
     "axios": "^0.15.3",
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.16.0",
     "compression": "^1.6.2",
     "cors": "^2.8.1",
-    "@exponent/vector-icons": "~4.0.0",
     "exponent": "^13.1.0",
     "feathers": "^2.0.3",
     "feathers-authentication": "^0.7.11",
