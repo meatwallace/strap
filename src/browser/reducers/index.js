@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import client from '../configs/apolloClient';
+import client from '../config/apolloClient';
 
 const reducer = combineReducers({
   apollo: client.reducer(),

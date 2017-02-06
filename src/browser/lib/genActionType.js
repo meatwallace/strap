@@ -1,9 +1,9 @@
-import { APP_NAME } from '~/configs/app';
+import setting from '~/lib/setting';
 
 export default function genActionType(scope, action) {
   if (typeof scope !== 'string' || typeof action !== 'string') {
     throw new Error('Func requires 2 string params');
   }
 
-  return `${APP_NAME}/${scope}/${action}`;
+  return `${setting('appName')}/${scope}/${action}`;
 }

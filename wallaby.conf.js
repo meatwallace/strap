@@ -19,7 +19,6 @@ module.exports = function init(wallaby) {
       '**/*.js': wallaby.compilers.babel(),
     },
     setup: (wall) => {
-      // eslint-disable-next-line global-require
       const config = require('./package.json').jest;
 
       wall.testFramework.configure(config);

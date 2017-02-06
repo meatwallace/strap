@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer as HotReload } from 'react-hot-loader';
@@ -5,8 +6,8 @@ import { ApolloProvider } from 'react-apollo';
 import { connectRouter } from 'connected-react-router';
 import reducer from './reducers';
 import App from './components/App';
-import client from './configs/apolloClient';
-import history from './configs/history';
+import client from './config/apolloClient';
+import history from './config/history';
 import getRootNode from './lib/getRootNode';
 import { store } from './store';
 

@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 export default function mutations(app) {
   const Users = app.service('users');
 

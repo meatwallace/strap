@@ -1,13 +1,12 @@
 import createLogger from 'redux-logger';
-import client from '../configs/apolloClient';
+import isDev from '~/config/isDev';
+import client from '../config/apolloClient';
 
 const middleware = [
   client.middleware(),
 ];
 
-const debug = process.env.NODE_ENV === 'development' || true;
-
-if (debug) {
+if (isDev) {
   const logger = createLogger({ collapsed: true });
 
   middleware.push(logger);

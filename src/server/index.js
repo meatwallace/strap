@@ -1,25 +1,23 @@
 import bodyParser from 'body-parser';
 import compress from 'compression';
 import cors from 'cors';
-import configuration from 'feathers-configuration';
 import hooks from 'feathers-hooks';
 import rest from 'feathers-rest';
 import socketio from 'feathers-socketio';
-import { join } from 'path';
-import { APP_NAME } from '~/configs/app';
+import fetch from 'node-fetch';
+import setting from '~/lib/setting';
 import middleware from './middleware';
 import services from './services';
 import app from './app';
 
+// Polyfill fetch
+global.fetch = fetch;
+
 // Takes a string, pumps it to the console
-const log = message => (console.info(`${APP_NAME}: ${message}`));
+const log = message => (console.info(`${setting('appName')}: ${message}`));
 
-// Configure our app so our config is accessible
-app.configure(configuration(join(__dirname, '../../config/feathers')));
-
-const isProduction = process.env.NODE_ENV === 'production';
-const port = isProduction ? app.get('port') : 3030;
-const host = isProduction ? app.get('host') : 'localhost';
+const port = setting('port');
+const host = setting('host');
 
 app
   .use(compress())

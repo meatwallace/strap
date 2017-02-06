@@ -1,4 +1,4 @@
-import { APP_NAME } from '~/configs/app';
+import setting from '~/lib/setting';
 import genActionType from '../genActionType';
 
 describe('genActionType', () => {
@@ -17,6 +17,6 @@ describe('genActionType', () => {
     const module = 'module';
     const action = 'ACTION';
 
-    expect(genActionType(module, action)).toBe(`${APP_NAME}/${module}/${action}`);
+    expect(genActionType(module, action)).toBe(`${setting('appName')}/${module}/${action}`);
   });
 });
