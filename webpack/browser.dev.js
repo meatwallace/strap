@@ -35,6 +35,7 @@ module.exports = function config() {
           plugins: [
             'react-hot-loader/babel',
           ],
+          babelrc: false,
         },
       }],
     },

@@ -16,6 +16,7 @@ module.exports = function config() {
         loader: 'babel-loader',
         options: {
           presets,
+          babelrc: false,
         },
       }],
     },

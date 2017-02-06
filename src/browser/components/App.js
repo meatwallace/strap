@@ -1,47 +1,31 @@
 import React, { PropTypes } from 'react';
-import { Match, Miss, Redirect } from 'react-router';
-import Router from 'react-router-addons-controlled/ControlledBrowserRouter';
+import { Switch, Route, Redirect } from 'react-router';
+import { ConnectedRouter as Router } from 'connected-react-router';
 import DocHead from './DocHead';
 import Footer from './Footer';
 import Header from './Header';
 import Home from './Home';
-import history from '../configs/history';
 import styles from './App.css';
 
-const App = ({ action, location, navigate }) => {
-  const handleChange = (routeLocation, routeAction) => {
-    if (routeAction === 'SYNC') {
-      navigate({ location: routeLocation, action });
-    } else {
-      navigate({ location: routeLocation, action: routeAction });
-    }
-  };
-
-  return (
-    <Router
-      history={history}
-      location={location}
-      action={action}
-      onChange={handleChange}
-    >
-      <div className={styles.container}>
-        <DocHead />
-        <Header />
-        <div className={styles.content}>
-          <Match exactly pattern="/" render={() => <Redirect to="/home" />} />
-          <Match exactly pattern="/home" render={Home} />
-          <Miss render={() => <Redirect to="/home" />} />
-        </div>
-        <Footer />
+const App = ({ history }) => (
+  <Router history={history}>
+    <div className={styles.container}>
+      <DocHead />
+      <Header />
+      <div className={styles.content}>
+        <Switch>
+          <Route exact path="/" render={() => <Redirect to="/home" />} />
+          <Route exact path="/home" render={Home} />
+          <Route render={() => <Redirect to="/home" />} />
+        </Switch>
       </div>
-    </Router>
-  );
-};
+      <Footer />
+    </div>
+  </Router>
+);
 
 App.propTypes = {
-  action: PropTypes.string.isRequired,
-  location: PropTypes.object.isRequired,
-  navigate: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
 };
 
 export default App;

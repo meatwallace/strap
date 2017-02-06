@@ -8,11 +8,7 @@ const middleware = [
 const debug = process.env.NODE_ENV === 'development' || true;
 
 if (debug) {
-  const logger = createLogger({
-    // Transform Immutable state to plain JS
-    stateTransformer(state) { return state.toJS(); },
-    collapsed: true,
-  });
+  const logger = createLogger({ collapsed: true });
 
   middleware.push(logger);
 }
