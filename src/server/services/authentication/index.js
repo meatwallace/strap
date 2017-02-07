@@ -1,15 +1,15 @@
 import authentication from 'feathers-authentication';
-import setting from '~/lib/setting';
+import config from '../../config/config';
 
 export default function auth() {
   const app = this;
 
-  const config = {
-    ...setting('auth'),
+  const authConfig = {
+    ...config.get('auth'),
     local: {
       usernameField: 'username',
     },
   };
 
-  app.configure(authentication(config));
+  app.configure(authentication(authConfig));
 }

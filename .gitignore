@@ -2,7 +2,7 @@ coverage/
 dist/
 
 # Settings
-settings.*.js
+/settings.js
 
 # Misc
 *.log

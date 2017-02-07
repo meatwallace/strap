@@ -7,6 +7,7 @@
     "build:browser:dev": "webpack-dev-server --progress --env 'browser.dev'",
     "build:browser:prod": "webpack --progress --env 'browser.prod'",
     "build:server:dev": "webpack --watch --progress --env 'server.dev' & nodemon ./dist/server/main.dev.bundle.js",
+    "build:native:dev": "exp start --clear & npm run build:server:dev",
     "test": "jest --watch --coverage",
     "test-ci": "jest --bail --coverage",
     "lint": "eslint ./src --fix; stylelint ./src/**/*.css",
@@ -71,12 +72,13 @@
     "analytics-react-native": "^1.0.1",
     "apollo-client": "^0.8.1",
     "axios": "^0.15.3",
+    "babel-polyfill": "^6.22.0",
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.16.0",
     "compression": "^1.6.2",
     "connected-react-router": "^4.0.0-beta.2",
     "cors": "^2.8.1",
-    "exponent": "^13.1.1-rc.1",
+    "exponent": "^14.0.0-alpha.0",
     "feathers": "^2.0.3",
     "feathers-authentication": "^0.7.11",
     "feathers-configuration": "^0.4.1",
@@ -95,6 +97,7 @@
     "mongoose": "^4.8.1",
     "node-fetch": "^1.6.3",
     "passport": "^0.3.2",
+    "passport-auth0": "^0.6.0",
     "react": "^15.4.2",
     "react-apollo": "^0.10.0",
     "react-dom": "^15.4.2",
@@ -116,9 +119,6 @@
     }
   },
   "jest": {
-    "globals": {
-      "__DEV__": false
-    },
     "moduleNameMapper": {
       "^~(.*)$": "<rootDir>/src/common$1",
       "^#(.*)$": "<rootDir>/src/server$1",

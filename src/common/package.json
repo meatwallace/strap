@@ -1,0 +1,4 @@
+{
+  "name": "@common",
+  "description": "Facilitates the usage of our @common/ import in React Native"
+}

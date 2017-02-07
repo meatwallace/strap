@@ -2,7 +2,7 @@ import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
 import { print } from 'graphql-tag/printer';
-import { schema, resolvers } from '~/data';
+import { schema, resolvers } from '@common/schema';
 
 const GRAPHQL = '/graphql';
 const GRAPHIQL = '/graphiql';
