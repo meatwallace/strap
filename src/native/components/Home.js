@@ -1,20 +1,25 @@
-// import React from 'react';
-// import { Subtitle, Text, View } from '@shoutem/ui';
-// import Badge from './Badge';
-//
-// const Home = () => (
-//   <View styleName="flexible vertical v-center h-center">
-//     <Badge />
-//     <Subtitle styleName="md-gutter">
-//       Universal Javascript MVP Boilerplate
-//     </Subtitle>
-//     <Text styleName="h-center">
-//       A universal boilerplate project for Javascript flavored MVP style development,
-//       with a focus on integrating modern tooling for maximum productivity.
-//     </Text>
-//   </View>
-// );
-//
-// Home.propTypes = {};
-//
-// export default Home;
+import React from 'react';
+import { H1, H2, Text, View } from 'native-base';
+import Badge from './Badge';
+
+const Home = () => (
+  <View>
+    <Badge />
+    <H1>
+      strap
+    </H1>
+    <H2>
+      Universal Javascript MVP Boilerplate
+    </H2>
+    <Text>
+      A universal boilerplate project for Javascript flavored MVP style development,
+      with a focus on integrating modern tooling for maximum productivity.
+    </Text>
+  </View>
+);
+
+Home.propTypes = {};
+
+Home.defaultProps = {};
+
+export default Home;

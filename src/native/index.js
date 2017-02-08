@@ -4,7 +4,7 @@ import { Platform, StatusBar } from 'react-native';
 import { NativeRouter } from 'react-router-native';
 import { getTheme, StyleProvider, View } from 'native-base';
 import Exponent, { Components, Font } from 'exponent';
-// import App from './components/App';
+import App from './components/App';
 import theme from './config/theme';
 import Welcome from './components/Welcome';
 
@@ -56,7 +56,9 @@ class Root extends Component {
               backgroundColor="blue"
               barStyle="dark-content"
             />
-            <Welcome />
+            { true ?
+              <Welcome /> :
+              <App /> }
           </View>
         </StyleProvider>
       </NativeRouter>
@@ -64,7 +66,4 @@ class Root extends Component {
   }
 }
 
-// { profile ?
-//   <App /> :
-//   <Welcome /> }
 Exponent.registerRootComponent(Root);
