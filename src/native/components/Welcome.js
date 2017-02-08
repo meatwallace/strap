@@ -1,23 +1,39 @@
 import React from 'react';
-import { Screen, View } from '@shoutem/ui';
 import { Switch, Route, Redirect } from 'react-router-native';
+import { View } from 'native-base';
 import Badge from './Badge';
 import LogIn from './LogIn';
-import SignUp from './SignUp';
+// import SignUp from './SignUp';
+
+const styles = {
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  branding: {
+    alignItems: 'center',
+    flex: 3,
+    justifyContent: 'center',
+  },
+  form: {
+    alignItems: 'stretch',
+    flex: 5,
+    justifyContent: 'center',
+  },
+};
 
 const Welcome = () => (
-  <Screen>
-    <View styleName="vertical lg-gutter h-center v-center">
+  <View style={styles.container}>
+    <View style={styles.branding}>
       <Badge />
+    </View>
+    <View style={styles.form}>
       <Switch>
         <Route exact path="/" component={LogIn} />
-        <Route exact path="/sign-up" component={SignUp} />
-        <Route render={<Redirect path="/" />} />
+        <Route render={() => <Redirect path="/" />} />
       </Switch>
     </View>
-  </Screen>
+  </View>
 );
-
-Welcome.propTypes = {};
 
 export default Welcome;

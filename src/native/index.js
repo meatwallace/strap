@@ -1,11 +1,19 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
-import { StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import { NativeRouter } from 'react-router-native';
+import { getTheme, StyleProvider, View } from 'native-base';
 import Exponent, { Components, Font } from 'exponent';
-import { View } from '@shoutem/ui';
-import App from './components/App';
+// import App from './components/App';
+import theme from './config/theme';
 import Welcome from './components/Welcome';
+
+const styles = {
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+};
 
 console.disableYellowBox = true;
 
@@ -14,32 +22,27 @@ const { AppLoading } = Components;
 class Root extends Component {
   state = {
     fontsLoaded: false,
-    profile: undefined,
   }
 
   async componentWillMount() {
-    await Font.loadAsync({
-      'Rubik-Black': require('../../assets/fonts/Rubik-Black.ttf'),
-      'Rubik-BlackItalic': require('../../assets/fonts/Rubik-BlackItalic.ttf'),
-      'Rubik-Bold': require('../../assets/fonts/Rubik-Bold.ttf'),
-      'Rubik-BoldItalic': require('../../assets/fonts/Rubik-BoldItalic.ttf'),
-      'Rubik-Italic': require('../../assets/fonts/Rubik-Italic.ttf'),
-      'Rubik-Light': require('../../assets/fonts/Rubik-Light.ttf'),
-      'Rubik-LightItalic': require('../../assets/fonts/Rubik-LightItalic.ttf'),
-      'Rubik-Medium': require('../../assets/fonts/Rubik-Medium.ttf'),
-      'Rubik-MediumItalic': require('../../assets/fonts/Rubik-MediumItalic.ttf'),
-      'Rubik-Regular': require('../../assets/fonts/Rubik-Regular.ttf'),
-      'rubicon-icon-font': require('../../assets/fonts/rubicon-icon-font.ttf'),
-
-      // new since Exponent 14
-      Rubik: require('../../assets/fonts/Rubik-Light.ttf'),
-    });
+    if (Platform.OS === 'ios') {
+      await Font.loadAsync({
+        SanFrancisco: require('native-base/Fonts/SanFrancisco.ttf'),
+        'SanFrancisco-Bold': require('native-base/Fonts/SanFranciscoBold.ttf'),
+        'SanFrancisco-Thin': require('native-base/Fonts/SanFranciscoThin.ttf'),
+      });
+    } else {
+      await Font.loadAsync({
+        Roboto: require('native-base/Fonts/Roboto.ttf'),
+        'Roboto-Bold': require('native-base/Fonts/Roboto_medium.ttf'),
+      });
+    }
 
     this.setState({ fontsLoaded: true });
   }
 
   render() {
-    const { fontsLoaded, profile } = this.state;
+    const { fontsLoaded } = this.state;
 
     if (!fontsLoaded) {
       return <AppLoading />;
@@ -47,18 +50,21 @@ class Root extends Component {
 
     return (
       <NativeRouter>
-        <View styleName="vertical flexible">
-          <StatusBar
-            backgroundColor="blue"
-            barStyle="dark-content"
-          />
-          { profile ?
-            <App /> :
-            <Welcome /> }
-        </View>
+        <StyleProvider style={getTheme(theme)}>
+          <View style={styles.container}>
+            <StatusBar
+              backgroundColor="blue"
+              barStyle="dark-content"
+            />
+            <Welcome />
+          </View>
+        </StyleProvider>
       </NativeRouter>
     );
   }
 }
 
+// { profile ?
+//   <App /> :
+//   <Welcome /> }
 Exponent.registerRootComponent(Root);

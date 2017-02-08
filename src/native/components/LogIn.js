@@ -1,43 +1,95 @@
 import React from 'react';
-import { Button, Caption, Text, View, TextInput } from '@shoutem/ui';
-import { Ionicons } from '@exponent/vector-icons';
+import { Button, Form, Icon, Input, Item, Label, Text, View } from 'native-base';
 
 const styles = {
+  container: {
+    alignItems: 'center',
+  },
   facebook: {
     backgroundColor: '#3b5998',
-    justifyContent: 'space-between',
+    marginBottom: 5,
   },
   google: {
     backgroundColor: '#d62d20',
-    justifyContent: 'space-between',
+  },
+  divider: {
+    marginBottom: 10,
+    marginTop: 20,
+  },
+  form: {
+    alignSelf: 'stretch',
+    marginBottom: 20,
+  },
+  formGroup: {
+    margin: 0,
+  },
+  label: {
+    paddingLeft: 5,
+  },
+  login: {
+    alignSelf: 'center',
+    marginBottom: 20,
+  },
+  notRegistered: {
+    alignSelf: 'center',
+    marginBottom: 5,
+  },
+  signUp: {
+    alignSelf: 'center',
+    fontSize: 20,
+    textDecorationLine: 'underline',
   },
 };
 
 const LogIn = () => (
-  <View styleName="vertical stretch h-center v-center">
-    <Button style={styles.facebook} styleName="full-width collapsible sm-gutter-bottom md-gutter-top">
-      <Ionicons name="logo-facebook" size={28} color="#fff" />
-      <Text styleName="bright">Login with Facebook</Text>
+  <View style={styles.container}>
+    <Button
+      full
+      iconLeft
+      style={styles.facebook}
+    >
+      <Icon name="logo-facebook" />
+      <Text>Login with Facebook</Text>
     </Button>
-    <Button style={styles.google} styleName="full-width collapsible">
-      <Ionicons name="logo-google" size={28} color="#fff" />
-      <Text styleName="bright">Login with Google</Text>
+    <Button
+      full
+      iconLeft
+      style={styles.google}
+    >
+      <Icon name="logo-google" />
+      <Text>Login with Google</Text>
     </Button>
-    <Text styleName="md-gutter">Or</Text>
-    <TextInput
-      styleName="sm-gutter-bottom"
-      placeholder={'Email'}
-    />
-    <TextInput
-      styleName="md-gutter-bottom"
-      placeholder={'Password'}
-      secureTextEntry
-    />
-    <Button styleName="md-gutter-bottom dark">
+    <Text style={styles.divider}>Or</Text>
+    <Form style={styles.form}>
+      <Item style={styles.formGroup} inlineLabel>
+        <Label style={styles.label}>Email</Label>
+        <Input
+          keyboardType="email-address"
+          placeholder="danny@dingo.com"
+        />
+      </Item>
+      <Item style={styles.formGroup} inlineLabel>
+        <Label style={styles.label}>Password</Label>
+        <Input
+          placeholder="******"
+          secureTextEntry
+        />
+      </Item>
+    </Form>
+    <Button
+      onPress={() => console.log('Log in!')}
+      primary
+      style={styles.login}
+    >
       <Text>Login</Text>
     </Button>
-    <Caption styleName="sm-gutter-bottom">Still not registered?</Caption>
-    <Text>Sign up</Text>
+    <Text style={styles.notRegistered}>{'Don\'t have an account yet?'}</Text>
+    <Text
+      onPress={() => console.log('Sign up!')}
+      style={styles.signUp}
+    >
+      Tap to Register
+    </Text>
   </View>
 );
 
