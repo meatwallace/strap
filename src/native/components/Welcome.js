@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Button, Form, Icon, Input, Item, Label, Text, View } from 'native-base';
+import { Button, Form, Input, Item, Label, Text, View } from 'native-base';
 import Badge from './Badge';
+import SocialButton from './SocialButton';
 
 const styles = {
   container: {
@@ -8,26 +9,16 @@ const styles = {
     flexDirection: 'column',
   },
   header: {
-    // backgroundColor: 'blue',
     alignItems: 'center',
     flex: 3,
     justifyContent: 'center',
   },
   content: {
-    // backgroundColor: 'green',
     flex: 8,
   },
   footer: {
-    // backgroundColor: 'yellow',
     justifyContent: 'center',
     flex: 2,
-  },
-  facebook: {
-    backgroundColor: '#3b5998',
-    marginBottom: 5,
-  },
-  google: {
-    backgroundColor: '#d62d20',
   },
   divider: {
     alignSelf: 'center',
@@ -84,24 +75,18 @@ class Welcome extends Component {
           <Badge size={100} />
         </View>
         <View style={styles.content}>
-          <Button
-            full
-            iconLeft
-            style={styles.facebook}
-          >
-            <Icon name="logo-facebook" />
-            <Text>{ signingUp ? 'Register' : 'Log in' } with Facebook</Text>
-          </Button>
-          <Button
-            full
-            iconLeft
-            style={styles.google}
-          >
-            <Icon name="logo-google" />
-            <Text>
-              { signingUp ? 'Register' : 'Log in' } with Google
-            </Text>
-          </Button>
+          <SocialButton
+            color="#3b5998"
+            name="Facebook"
+            icon="logo-facebook"
+            signingUp={signingUp}
+          />
+          <SocialButton
+            color="#d62d20"
+            name="Google"
+            icon="logo-google"
+            signingUp={signingUp}
+          />
           <Text style={styles.divider}>Or</Text>
           <Form style={styles.form}>
             <Item style={styles.formGroup} inlineLabel>
