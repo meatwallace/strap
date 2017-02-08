@@ -47,11 +47,14 @@ class Root extends Component {
 
     return (
       <NativeRouter>
-        <View styleName="flexible">
+        <View styleName="vertical flexible">
+          <StatusBar
+            backgroundColor="blue"
+            barStyle="dark-content"
+          />
           { profile ?
             <App /> :
             <Welcome /> }
-          <StatusBar barStyle="default" hidden={false} />
         </View>
       </NativeRouter>
     );

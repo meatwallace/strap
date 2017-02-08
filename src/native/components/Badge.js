@@ -1,7 +1,11 @@
 import React from 'react';
-import { Image } from '@shoutem/ui';
+import { Image, View } from '@shoutem/ui';
 
-const Badge = () => <Image source={require('../../../assets/images/logo.png')} />;
+const Badge = () => (
+  <View styleName="md-gutter">
+    <Image source={require('../../../assets/images/logo.png')} />
+  </View>
+);
 
 Badge.propTypes = {};
 

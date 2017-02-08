@@ -1,6 +1,6 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-native';
-import { View, Screen } from '@shoutem/ui';
+import { Route, Switch, Redirect } from 'react-router-native';
+import { View, Screen, Text } from '@shoutem/ui';
 import Header from './Header';
 import Navigation from './Navigation';
 import Home from './Home';
@@ -10,9 +10,11 @@ const App = () => (
     <Header />
     <View styleName="flexible lg-gutter-top">
       <Switch>
-        <Route exact path="/" render={Home} />
+        <Route exact path="/" component={Home} />
+        <Route render={() => <Redirect to="/" />} />
       </Switch>
     </View>
+    <Text>{location.pathname}</Text>
     <Navigation />
   </Screen>
 );
