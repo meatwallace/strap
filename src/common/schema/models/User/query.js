@@ -3,8 +3,8 @@ export default function queries(app) {
   const Viewer = app.service('viewer');
 
   return {
-    async author(root, { username }, context) {
-      const query = { username };
+    async author(root, { email }, context) {
+      const query = { email };
       const users = await Users.find({ query });
 
       return users[0];

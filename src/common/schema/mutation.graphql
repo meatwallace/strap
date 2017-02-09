@@ -5,12 +5,12 @@
 
 type Mutation {
   signUp (
-    username: String!
+    email: String!
     password: String!
   ): User
 
   logIn (
-    username: String!
+    email: String!
     password: String!
   ): AuthPayload
 

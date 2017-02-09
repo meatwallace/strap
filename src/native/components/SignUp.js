@@ -14,11 +14,10 @@ class SignUp extends Component {
 
   static defaultProps = {}
 
-  submit = ({ username, password }) => {
+  submit = ({ email, password }) => {
     const { signUp } = this.props;
 
-    console.log('Simulate submit');
-    console.log(username, password);
+    signUp({ email, password });
   }
 
   render() {
@@ -38,19 +37,25 @@ class SignUp extends Component {
           <Text style={styles.divider}>OR</Text>
           <Form style={styles.form}>
             <Field
+              autoCapitalize="none"
+              autoCorrect="false"
               component={Input}
               icon="mail"
               keyboardType="email-address"
-              name="username"
+              name="email"
               placeholder="Email"
+              returnKeyType="next"
               styles={styles}
             />
             <Field
+              autoCapitalize="none"
+              autoCorrect="false"
               component={Input}
               icon="lock"
               name="password"
               secureTextEntry
               placeholder="Password"
+              returnKeyType="go"
               styles={styles}
             />
             <Button

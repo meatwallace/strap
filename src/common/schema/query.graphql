@@ -3,7 +3,7 @@
 
 type Query {
   current: User
-  author(username: String!): User
+  author(email: String!): User
   authors: [User]
   todos: [Todo]
   todo(_id: String!): Todo

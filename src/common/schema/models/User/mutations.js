@@ -9,8 +9,8 @@ export default function mutations(app) {
 
       return user;
     },
-    async logIn(root, { username, password }, context) {
-      const result = await axios.post('/auth/local', { username, password });
+    async logIn(root, { email, password }, context) {
+      const result = await axios.post('/auth/local', { email, password });
 
       return result;
     },

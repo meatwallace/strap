@@ -6,7 +6,7 @@ import { logIn } from '@common/mutations';
 import LogIn from '../components/LogIn';
 
 const constraints = {
-  username: {
+  email: {
     email: true,
   },
 };
@@ -14,7 +14,7 @@ const constraints = {
 export default compose(
   graphql(logIn, {
     props: ({ mutate }) => ({
-      logIn: (username, password) => mutate({ variables: { username, password } }),
+      logIn: ({ email, password }) => mutate({ variables: { email, password } }),
     }),
   }),
   reduxForm({

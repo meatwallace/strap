@@ -7,7 +7,7 @@ export default function auth() {
   const authConfig = {
     ...config.get('auth'),
     local: {
-      usernameField: 'username',
+      emailField: 'email',
     },
   };
 
