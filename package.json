@@ -67,6 +67,7 @@
     "webpack-merge": "^2.6.1"
   },
   "dependencies": {
+    "@exponent/vector-icons": "^4.0.0",
     "analytics-react-native": "^1.0.1",
     "apollo-client": "^0.8.3",
     "axios": "^0.15.3",
@@ -74,6 +75,7 @@
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.16.0",
     "compression": "^1.6.2",
+    "connected-react-router": "^4.0.0-beta.3",
     "cors": "^2.8.1",
     "exponent": "^14.0.0-alpha.0",
     "feathers": "^2.0.3",
@@ -105,8 +107,10 @@
     "react-router": "4.0.0-beta.5",
     "react-router-native": "4.0.0-beta.5",
     "redux": "^3.6.0",
+    "redux-form": "^6.5.0",
     "redux-logger": "^2.8.1",
     "sanitize.css": "^4.1.0",
+    "validate.js": "^0.11.1",
     "whatwg-fetch": "^2.0.2",
     "winston": "^2.3.1"
   },

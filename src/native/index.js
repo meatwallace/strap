@@ -1,12 +1,15 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
+import { ApolloProvider } from 'react-apollo';
 import { Platform, StatusBar } from 'react-native';
 import { NativeRouter } from 'react-router-native';
 import { getTheme, StyleProvider, View } from 'native-base';
 import Exponent, { Components, Font } from 'exponent';
+import client from '@common/config/apollo';
 import App from './components/App';
 import theme from './config/theme';
 import Welcome from './components/Welcome';
+import store from './store';
 
 const styles = {
   container: {
@@ -49,19 +52,21 @@ class Root extends Component {
     }
 
     return (
-      <NativeRouter>
-        <StyleProvider style={getTheme(theme)}>
-          <View style={styles.container}>
-            <StatusBar
-              backgroundColor="blue"
-              barStyle="dark-content"
-            />
-            { true ?
-              <Welcome /> :
-              <App /> }
-          </View>
-        </StyleProvider>
-      </NativeRouter>
+      <ApolloProvider client={client} store={store}>
+        <NativeRouter>
+          <StyleProvider style={getTheme(theme)}>
+            <View style={styles.container}>
+              <StatusBar
+                backgroundColor="blue"
+                barStyle="dark-content"
+              />
+              { true ?
+                <Welcome /> :
+                <App /> }
+            </View>
+          </StyleProvider>
+        </NativeRouter>
+      </ApolloProvider>
     );
   }
 }

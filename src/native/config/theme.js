@@ -30,7 +30,7 @@ export default {
   CheckboxIconSize: (Platform.OS === 'ios') ? 21 : 14,
   CheckboxIconMarginTop: (Platform.OS === 'ios') ? undefined : 1,
   CheckboxFontSize: (Platform.OS === 'ios') ? (23 / 0.9) : 18,
-  DefaultFontSize: 17,
+  DefaultFontSize: 16,
   checkboxBgColor: '#039BE5',
   checkboxSize: 20,
   checkboxTickColor: '#fff',
@@ -80,7 +80,7 @@ export default {
     return this.fontSizeBase * 0.8;
   },
   get borderRadiusLarge() {
-    return this.fontSizeBase * 3.8;
+    return 0;
   },
 
   buttonPadding: 6,
@@ -96,7 +96,7 @@ export default {
   cardDefaultBg: '#fff',
 
       // Color
-  brandPrimary: (Platform.OS === 'ios') ? '#007aff' : '#3F51B5',
+  brandPrimary: '#17224b',
   brandInfo: '#62B1F6',
   brandSuccess: '#5cb85c',
   brandDanger: '#d9534f',
@@ -105,7 +105,7 @@ export default {
 
     // Font
   fontFamily: (Platform.OS === 'ios') ? 'SanFrancisco' : 'Roboto',
-  fontSizeBase: 15,
+  fontSizeBase: 14,
 
   get fontSizeH1() {
     return this.fontSizeBase * 1.8;
@@ -161,7 +161,7 @@ export default {
 
 
     // InputGroup
-  inputFontSize: 17,
+  inputFontSize: 16,
   inputBorderColor: '#D9D5DC',
   inputSuccessBorderColor: '#2b8339',
   inputErrorBorderColor: '#ed2f2f',
@@ -250,7 +250,7 @@ export default {
 
 
     // Other
-  borderRadiusBase: (Platform.OS === 'ios') ? 5 : 2,
+  borderRadiusBase: 0,
   borderWidth: (1 / PixelRatio.getPixelSizeForLayoutSize(1)),
   contentPadding: 10,
 
@@ -267,5 +267,5 @@ export default {
   deviceHeight,
 
     // New Variable
-  inputGroupRoundedBorderRadius: 30,
+  inputGroupRoundedBorderRadius: 0,
 };

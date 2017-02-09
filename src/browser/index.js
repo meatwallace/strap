@@ -4,12 +4,12 @@ import ReactDOM from 'react-dom';
 import { AppContainer as HotReload } from 'react-hot-loader';
 import { ApolloProvider } from 'react-apollo';
 import { connectRouter } from 'connected-react-router';
+import client from '@common/config/apollo';
 import reducer from './reducers';
 import App from './components/App';
-import client from './config/apolloClient';
 import history from './config/history';
 import getRootNode from './lib/getRootNode';
-import { store } from './store';
+import store from './store';
 
 const render = () => {
   ReactDOM.render(

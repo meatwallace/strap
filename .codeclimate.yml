@@ -9,6 +9,8 @@ engines:
     channel: "eslint-3"
   fixme:
     enabled: true
+  stylelint:
+    enabled: true
 ratings:
   paths:
   - "**.js"
