@@ -1,5 +1,4 @@
-import { compose } from 'lodash/fp';
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import { reduxForm } from 'redux-form';
 import validate from 'validate.js';
 import { signUp } from '@common/mutations';

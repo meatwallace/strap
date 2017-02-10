@@ -1,11 +1,16 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Form, Icon, Text, View } from 'native-base';
+import { AsyncStorage } from 'react-native';
 import { Link } from 'react-router-native';
 import { Field } from 'redux-form';
 import Input from './Input';
 import styles from './Form.styles';
 
 class LogIn extends Component {
+  static contextTypes = {
+    router: PropTypes.object,
+  }
+
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     logIn: PropTypes.func.isRequired,
@@ -14,10 +19,15 @@ class LogIn extends Component {
 
   static defaultProps = {}
 
-  submit = ({ email, password }) => {
+  submit = async ({ email, password }) => {
     const { logIn } = this.props;
+    const { router } = this.context;
 
-    logIn({ email, password });
+    const { data: { logIn: { token } } } = await logIn({ email, password });
+
+    await AsyncStorage.setItem('token', token);
+
+    router.to('/home');
   }
 
   render() {
@@ -38,7 +48,7 @@ class LogIn extends Component {
           <Form style={styles.form}>
             <Field
               autoCapitalize="none"
-              autoCorrect="false"
+              autoCorrect={false}
               component={Input}
               icon="mail"
               keyboardType="email-address"
@@ -49,7 +59,7 @@ class LogIn extends Component {
             />
             <Field
               autoCapitalize="none"
-              autoCorrect="false"
+              autoCorrect={false}
               component={Input}
               icon="lock"
               name="password"
@@ -70,7 +80,7 @@ class LogIn extends Component {
           </Form>
         </View>
         <View style={styles.footer}>
-          <Link component={Button} dark small to="/sign-up" transparent>
+          <Link component={Button} dark small to="/signup" transparent>
             <Text light>SIGN UP</Text>
           </Link>
           <Link component={Button} dark small to="/reset-password" transparent>

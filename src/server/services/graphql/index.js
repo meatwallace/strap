@@ -11,12 +11,14 @@ export default function init() {
   const app = this;
 
   const executableSchema = makeExecutableSchema({
-    typeDefs: [print(schema)],
+    typeDefs: schema,
     resolvers: resolvers(app),
   });
 
   app.use(GRAPHQL, bodyParser.json(), graphqlExpress((req) => {
     const { token, provider } = req.feathers;
+    console.log('GraphQL service hit');
+    console.log(req.feathers);
 
     return {
       schema: executableSchema,

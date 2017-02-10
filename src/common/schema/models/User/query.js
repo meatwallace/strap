@@ -14,7 +14,7 @@ export default function queries(app) {
 
       return users;
     },
-    async current(root, args, context) {
+    async user(root, args, context) {
       const user = await Viewer.find(context);
 
       return user;

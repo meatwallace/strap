@@ -6,9 +6,7 @@ export default function auth() {
 
   const authConfig = {
     ...config.get('auth'),
-    local: {
-      emailField: 'email',
-    },
+    local: {},
   };
 
   app.configure(authentication(authConfig));

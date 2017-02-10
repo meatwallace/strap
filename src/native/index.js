@@ -1,14 +1,13 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { Platform, StatusBar } from 'react-native';
+import { AsyncStorage, Platform, StatusBar } from 'react-native';
 import { NativeRouter } from 'react-router-native';
 import { getTheme, StyleProvider, View } from 'native-base';
 import Exponent, { Components, Font } from 'exponent';
-import App from './components/App';
+import App from './containers/App';
 import client from './config/apollo';
 import theme from './config/theme';
-import Welcome from './components/Welcome';
 import store from './store';
 
 const styles = {
@@ -24,6 +23,7 @@ const { AppLoading } = Components;
 
 class Root extends Component {
   state = {
+    loggedIn: false,
     fontsLoaded: false,
   }
 
@@ -44,6 +44,16 @@ class Root extends Component {
     this.setState({ fontsLoaded: true });
   }
 
+  async componentWillUpdate(_, { loggedIn }) {
+    if (!loggedIn) {
+      const token = await AsyncStorage.getItem('token');
+
+      if (token !== null) {
+        this.setState({ loggedIn: true });
+      }
+    }
+  }
+
   render() {
     const { fontsLoaded } = this.state;
 
@@ -60,9 +70,7 @@ class Root extends Component {
                 backgroundColor="blue"
                 barStyle="dark-content"
               />
-              { true ?
-                <Welcome /> :
-                <App /> }
+              <App />
             </View>
           </StyleProvider>
         </NativeRouter>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'native-base';
-import { Redirect, Route, Switch } from 'react-router-native';
+import { Route, Switch } from 'react-router-native';
 import Badge from './Badge';
 import SignUp from '../containers/SignUp';
 import LogIn from '../containers/LogIn';
@@ -13,10 +13,9 @@ const Welcome = () => (
     </View>
     <View style={styles.content}>
       <Switch>
-        <Route exact path="/sign-up" component={SignUp} />
-        <Route exact path="/log-in" component={LogIn} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route exact path="/login" component={LogIn} />
         {/* <Route exact path="/reset-password" component={ResetForm} /> */}
-        <Route render={() => <Redirect to="/sign-up" />} />
       </Switch>
     </View>
   </View>

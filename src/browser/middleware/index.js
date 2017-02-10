@@ -1,5 +1,5 @@
 import createLogger from 'redux-logger';
-import client from '../config/apolloClient';
+import client from '@common/config/apollo';
 
 const middleware = [
   client.middleware(),

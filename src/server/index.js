@@ -11,7 +11,7 @@ const host = config.get('host');
 const appName = config.get('appName');
 
 // Start listening
-app.listen(port, (err) => {
+app.listen(port, host, (err) => {
   if (err) {
     console.info(`${appName}: ${err}`);
   } else {

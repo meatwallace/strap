@@ -2,7 +2,7 @@
 #import './models/User/user.graphql'
 
 type Query {
-  current: User
+  user: User
   author(email: String!): User
   authors: [User]
   todos: [Todo]

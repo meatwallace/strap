@@ -38,7 +38,7 @@ class SignUp extends Component {
           <Form style={styles.form}>
             <Field
               autoCapitalize="none"
-              autoCorrect="false"
+              autoCorrect={false}
               component={Input}
               icon="mail"
               keyboardType="email-address"
@@ -49,7 +49,7 @@ class SignUp extends Component {
             />
             <Field
               autoCapitalize="none"
-              autoCorrect="false"
+              autoCorrect={false}
               component={Input}
               icon="lock"
               name="password"
@@ -70,7 +70,7 @@ class SignUp extends Component {
           </Form>
         </View>
         <View style={styles.footer}>
-          <Link component={Button} dark small to="/log-in" transparent>
+          <Link component={Button} dark small to="/login" transparent>
             <Text light>LOG IN</Text>
           </Link>
           <Link component={Button} dark small to="/reset-password" transparent>
