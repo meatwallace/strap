@@ -1,8 +1,8 @@
 {
   "packagerPort": 19001,
-  "packagerPid": 7326,
+  "packagerPid": 3654,
   "exponentServerNgrokUrl": "https://4a-y3j.meatwallace.strap.exp.direct",
   "packagerNgrokUrl": "https://packager.4a-y3j.meatwallace.strap.exp.direct",
-  "ngrokPid": 7344,
+  "ngrokPid": 3670,
   "exponentServerPort": 19000
 }

@@ -7,13 +7,16 @@ const networkInterface = createNetworkInterface({ uri: config.get('graphQL') });
 /* eslint-disable no-param-reassign */
 networkInterface.use([{
   async applyMiddleware(req, next) {
+    const token = await AsyncStorage.getItem('token');
+
     if (!req.options.headers) {
       req.options.headers = {};
     }
 
-    const token = await AsyncStorage.getItem('token');
+    if (token !== null) {
+      req.options.headers.authorization = token;
+    }
 
-    req.options.headers.authorization = token;
     next();
   },
 }]);

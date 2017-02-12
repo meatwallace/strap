@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import React, { Component } from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { AsyncStorage, Platform, StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import { NativeRouter } from 'react-router-native';
 import { getTheme, StyleProvider, View } from 'native-base';
 import Exponent, { Components, Font } from 'exponent';
@@ -10,20 +10,12 @@ import client from './config/apollo';
 import theme from './config/theme';
 import store from './store';
 
-const styles = {
-  container: {
-    flex: 1,
-    padding: 20,
-  },
-};
-
 console.disableYellowBox = true;
 
 const { AppLoading } = Components;
 
 class Root extends Component {
   state = {
-    loggedIn: false,
     fontsLoaded: false,
   }
 
@@ -44,16 +36,6 @@ class Root extends Component {
     this.setState({ fontsLoaded: true });
   }
 
-  async componentWillUpdate(_, { loggedIn }) {
-    if (!loggedIn) {
-      const token = await AsyncStorage.getItem('token');
-
-      if (token !== null) {
-        this.setState({ loggedIn: true });
-      }
-    }
-  }
-
   render() {
     const { fontsLoaded } = this.state;
 
@@ -65,7 +47,7 @@ class Root extends Component {
       <ApolloProvider client={client} store={store}>
         <NativeRouter>
           <StyleProvider style={getTheme(theme)}>
-            <View style={styles.container}>
+            <View>
               <StatusBar
                 backgroundColor="blue"
                 barStyle="dark-content"

@@ -1,8 +1,7 @@
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { makeExecutableSchema } from 'graphql-tools';
-import { print } from 'graphql-tag/printer';
-import { schema, resolvers } from '@common/schema';
+import { schema, resolvers } from '@common/data/schema';
 
 const GRAPHQL = '/graphql';
 const GRAPHIQL = '/graphiql';
@@ -17,8 +16,6 @@ export default function init() {
 
   app.use(GRAPHQL, bodyParser.json(), graphqlExpress((req) => {
     const { token, provider } = req.feathers;
-    console.log('GraphQL service hit');
-    console.log(req.feathers);
 
     return {
       schema: executableSchema,

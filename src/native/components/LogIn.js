@@ -8,10 +8,16 @@ import styles from './Form.styles';
 
 class LogIn extends Component {
   static contextTypes = {
-    router: PropTypes.object,
+    router: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
   }
 
   static propTypes = {
+    data: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
+      user: PropTypes.object,
+    }).isRequired,
     handleSubmit: PropTypes.func.isRequired,
     logIn: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
@@ -19,19 +25,44 @@ class LogIn extends Component {
 
   static defaultProps = {}
 
-  submit = async ({ email, password }) => {
-    const { logIn } = this.props;
+  shouldComponentUpdate(nextProps) {
+    const { data: { user } } = nextProps;
     const { router } = this.context;
 
-    const { data: { logIn: { token } } } = await logIn({ email, password });
+    if (user) {
+      router.push('/home');
 
-    await AsyncStorage.setItem('token', token);
+      return false;
+    }
 
-    router.to('/home');
+    return true;
+  }
+
+  submit = async ({ email, password }) => {
+    const { router } = this.context;
+    const { logIn } = this.props;
+    try {
+      const { data: { logIn: { token } } } = await logIn({ email, password });
+
+      await AsyncStorage.setItem('token', token);
+
+      router.push('/home');
+    } catch (e) {
+      console.log('Error');
+      console.log(e);
+      console.log(e.error);
+      console.log(e.info);
+      console.log(e.graphQLErrors);
+      // TODO: Error handling
+    }
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { data: { loading }, handleSubmit, submitting } = this.props;
+
+    if (loading) {
+      return <Text>Loading</Text>;
+    }
 
     return (
       <View style={styles.container}>

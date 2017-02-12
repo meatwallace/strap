@@ -1,33 +1,45 @@
-// import React from 'react';
-// import { View } from '@shoutem/ui';
-// import NavItem from './NavItem';
-//
-// const NAV_TYPES = {
-//   home: {
-//     icon: 'md-home',
-//     label: 'Home',
-//   },
-//   todos: {
-//     icon: 'md-checkmark-circle-outline',
-//     label: 'Todos',
-//   },
-//   info: {
-//     icon: 'md-information-circle',
-//     label: 'Info',
-//   },
-//   user: {
-//     icon: 'md-contact',
-//     label: 'Account',
-//   },
-// };
-//
-// const Navigation = () => (
-//   <View styleName="horizontal space-between">
-//     <NavItem {...NAV_TYPES.home} />
-//     <NavItem {...NAV_TYPES.todos} />
-//     <NavItem {...NAV_TYPES.info} />
-//     <NavItem {...NAV_TYPES.user} />
-//   </View>
-// );
-//
-// export default Navigation;
+import React from 'react';
+import { View } from 'native-base';
+import NavItem from './NavItem';
+
+const NAV_TYPES = {
+  home: {
+    icon: 'md-home',
+    label: 'Home',
+    to: '/home',
+  },
+  todos: {
+    icon: 'md-checkmark-circle-outline',
+    label: 'Todos',
+    to: '/todos',
+  },
+  info: {
+    icon: 'md-information-circle',
+    label: 'Info',
+    to: '/info',
+  },
+  logout: {
+    icon: 'md-exit',
+    label: 'Log out',
+    to: '/logout',
+  },
+};
+
+const styles = {
+  container: {
+    flexDirection: 'row',
+    minHeight: 45,
+    maxHeight: 45,
+  },
+};
+
+const Navigation = () => (
+  <View style={styles.container}>
+    <NavItem {...NAV_TYPES.home} />
+    <NavItem {...NAV_TYPES.todos} />
+    <NavItem {...NAV_TYPES.info} />
+    <NavItem {...NAV_TYPES.logout} />
+  </View>
+);
+
+export default Navigation;

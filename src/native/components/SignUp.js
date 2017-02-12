@@ -1,12 +1,23 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Form, Icon, Text, View } from 'native-base';
+import { AsyncStorage } from 'react-native';
 import { Link } from 'react-router-native';
 import { Field } from 'redux-form';
 import Input from './Input';
 import styles from './Form.styles';
 
 class SignUp extends Component {
+  static contextTypes = {
+    router: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+  }
+
   static propTypes = {
+    data: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
+      user: PropTypes.object,
+    }).isRequired,
     handleSubmit: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
@@ -14,14 +25,42 @@ class SignUp extends Component {
 
   static defaultProps = {}
 
-  submit = ({ email, password }) => {
-    const { signUp } = this.props;
+  shouldComponentUpdate(nextProps) {
+    const { data: { user } } = nextProps;
+    const { router } = this.context;
 
-    signUp({ email, password });
+    if (user) {
+      router.push('/home');
+
+      return false;
+    }
+
+    return true;
+  }
+
+  submit = async ({ email, password }) => {
+    const { router } = this.context;
+    const { logIn, signUp } = this.props;
+
+    try {
+      await signUp({ email, password });
+
+      const { data: { logIn: { token } } } = await logIn({ email, password });
+
+      await AsyncStorage.setItem('token', token);
+
+      router.push('/home');
+    } catch (e) {
+      // TODO: Error handling
+    }
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit, submitting, data: { loading } } = this.props;
+
+    if (loading) {
+      return <Text>Loading</Text>;
+    }
 
     return (
       <View style={styles.container}>
