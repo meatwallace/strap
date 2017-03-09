@@ -30,7 +30,6 @@ batchingNetworkInterface.use([{
 const client = new ApolloClient({
   dataIdFromObject: o => o.id,
   networkInterface: batchingNetworkInterface,
-  queryDeduplication: true,
 });
 
 export default client;
