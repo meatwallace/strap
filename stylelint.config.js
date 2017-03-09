@@ -1,10 +1,13 @@
 module.exports = {
   extends: 'stylelint-config-standard',
+  plugins: [
+    'stylelint-order',
+  ],
   rules: {
     'at-rule-no-vendor-prefix': true,
     'color-named': 'never',
-    'declaration-block-properties-order': [['composes'], { unspecified: 'bottomAlphabetical' }],
     'declaration-no-important': true,
+    'order/declaration-block-properties-alphabetical-order': true,
     'font-family-name-quotes': 'always-unless-keyword',
     'font-weight-notation': 'numeric',
     'function-url-quotes': 'always',

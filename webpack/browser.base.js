@@ -1,5 +1,5 @@
 import HTMLWebpackPlugin from 'html-webpack-plugin';
-import webpack from 'webpack';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import merge from 'webpack-merge';
 import { resolve } from 'path';
 import universalBase from './universal.babel';
@@ -12,11 +12,13 @@ module.exports = function config() {
       rules: [{
         test: /\.css$/,
         exclude: /node_modules/,
-        loaders: [
-          'style-loader',
-          'css-loader?modules&importLoaders=1',
-          'postcss-loader',
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader?modules&importLoaders=1',
+            'postcss-loader',
+          ],
+        }),
       }, {
         test: /\.svg$/,
         loader: 'svg-url-loader',
@@ -44,13 +46,13 @@ module.exports = function config() {
       publicPath: '/',
     },
     plugins: [
-      new webpack.NamedModulesPlugin(),
+      new ExtractTextPlugin('styles.css'),
       new HTMLWebpackPlugin(),
     ],
     resolve: {
       alias: {
-        fonts: resolve(__dirname, '../fonts'),
-        img: resolve(__dirname, '../img'),
+        fonts: resolve(__dirname, '../assets/fonts'),
+        images: resolve(__dirname, '../assets/images'),
       },
     },
   };

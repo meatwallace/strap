@@ -4,10 +4,12 @@
   <dict>
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
+    <key>CFBundleDisplayName</key>
+    <string>Strap</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
-    <string>org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)</string>
+    <string>com.strap.native</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundleName</key>
@@ -18,6 +20,38 @@
     <string>1.0</string>
     <key>CFBundleSignature</key>
     <string>????</string>
+    <key>FacebookAppID</key>
+    <string>1803893939861286</string>
+    <key>FacebookDisplayName</key>
+    <string>strap</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+      <string>fbapi</string>
+      <string>fbauth2</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>Facebook</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb1803893939861286</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLName</key>
+        <string>Google</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.googleusercontent.apps.856839298791-b34dq123a5l2rmnp2vbaudftk8oaqovp</string>
+        </array>
+      </dict>
+    </array>
     <key>CFBundleVersion</key>
     <string>1</string>
     <key>LSRequiresIPhoneOS</key>
@@ -60,6 +94,40 @@
       <string>MaterialIcons.ttf</string>
       <string>Octicons.ttf</string>
       <string>SimpleLineIcons.ttf</string>
+      <string>Zocial.ttf</string>
+      <string>Andale Mono.ttf</string>
+      <string>Arial Black.ttf</string>
+      <string>Arial.ttf</string>
+      <string>Comic Sans MS.ttf</string>
+      <string>Courier New.ttf</string>
+      <string>Entypo.ttf</string>
+      <string>EvilIcons.ttf</string>
+      <string>FontAwesome.ttf</string>
+      <string>Foundation.ttf</string>
+      <string>Georgia.ttf</string>
+      <string>Ionicons.ttf</string>
+      <string>MaterialIcons.ttf</string>
+      <string>Microsoft Sans Serif.ttf</string>
+      <string>Octicons.ttf</string>
+      <string>Roboto_medium.ttf</string>
+      <string>Roboto.ttf</string>
+      <string>rubicon-icon-font.ttf</string>
+      <string>Rubik-Black.ttf</string>
+      <string>Rubik-BlackItalic.ttf</string>
+      <string>Rubik-Bold.ttf</string>
+      <string>Rubik-BoldItalic.ttf</string>
+      <string>Rubik-Italic.ttf</string>
+      <string>Rubik-Light.ttf</string>
+      <string>Rubik-LightItalic.ttf</string>
+      <string>Rubik-Medium.ttf</string>
+      <string>Rubik-MediumItalic.ttf</string>
+      <string>Rubik-Regular.ttf</string>
+      <string>SanFrancisco.ttf</string>
+      <string>SanFranciscoBold.ttf</string>
+      <string>SanFranciscoThin.ttf</string>
+      <string>SF-UI-Text-Regular.otf</string>
+      <string>Skia.ttf</string>
+      <string>Times New Roman.ttf</string>
       <string>Zocial.ttf</string>
       <string>Andale Mono.ttf</string>
       <string>Arial Black.ttf</string>

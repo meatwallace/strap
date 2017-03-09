@@ -4,8 +4,7 @@ node_js:
 cache: yarn
 before_script:
   - "npm run lint"
-  - "echo $APP_CONFIG_DEV >> settings.dev.js"
-  - "echo $APP_CONFIG_PROD >> settings.prod.js"
+  # TODO: Implement settings
 script:
   - "npm run test-ci"
   - "yarn global add codeclimate-test-reporter"

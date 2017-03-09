@@ -1,0 +1,10 @@
+#import './AuthPayload/type.graphql'
+#import './User/type.graphql'
+
+#import './rootMutation.graphql'
+#import './rootQuery.graphql'
+
+type schema {
+  query: Query
+  mutation: Mutation
+}

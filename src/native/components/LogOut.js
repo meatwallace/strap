@@ -1,4 +1,5 @@
 import { Component, PropTypes } from 'react';
+import ApolloClient from 'apollo-client';
 import { AsyncStorage } from 'react-native';
 
 class LogOut extends Component {
@@ -8,11 +9,19 @@ class LogOut extends Component {
     }).isRequired,
   }
 
+  static propTypes = {
+    client: PropTypes.instanceOf(ApolloClient).isRequired,
+  }
+
   async componentWillMount() {
     const { router } = this.context;
+    const { client } = this.props;
+
+    // Wipe Apollo's cache
+    await client.resetStore();
 
     await AsyncStorage.removeItem('token');
-    // TODO: Clear apollo cache
+
     router.push('/login');
   }
 

@@ -20,6 +20,7 @@ module.exports = function config() {
       },
     },
     entry: [
+      'babel-polyfill',
       'react-hot-loader/patch',
       `webpack-dev-server/client?http://localhost:${PORT}`,
       'webpack/hot/only-dev-server',
@@ -40,15 +41,16 @@ module.exports = function config() {
       }],
     },
     output: {
-      filename: '[name].bundle.js',
+      filename: '[name].js',
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('development'),
         },
       }),
+      new webpack.NamedModulesPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
     ],
   };
 

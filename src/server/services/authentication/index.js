@@ -1,13 +1,18 @@
 import authentication from 'feathers-authentication';
-import config from '../../config/config';
+import { Strategy as FacebookStrategy } from 'passport-facebook';
+import FacebookTokenStrategy from 'passport-facebook-token';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy as GoogleTokenStrategy } from 'passport-google-token';
 
 export default function auth() {
   const app = this;
 
-  const authConfig = {
-    ...config.get('auth'),
-    local: {},
-  };
+  const config = app.get('auth');
 
-  app.configure(authentication(authConfig));
+  config.facebook.strategy = FacebookStrategy;
+  config.facebook.tokenStrategy = FacebookTokenStrategy;
+  config.google.strategy = GoogleStrategy;
+  config.google.tokenStrategy = GoogleTokenStrategy;
+
+  app.configure(authentication(config));
 }

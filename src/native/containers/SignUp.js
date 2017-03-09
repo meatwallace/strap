@@ -1,9 +1,10 @@
 import { compose, graphql } from 'react-apollo';
 import { reduxForm } from 'redux-form';
-import { signUp, logIn } from '@common/data/mutations';
+import * as mutations from '@common/data/mutations';
 import validate from 'validate.js';
-import { user } from '@common/data/queries';
 import SignUp from '../components/SignUp';
+
+const { signUp, logInWithGoogle, logInWithFacebook } = mutations;
 
 const constraints = {
   email: {
@@ -23,10 +24,34 @@ export default compose(
       signUp: ({ email, password }) => mutate({ variables: { email, password } }),
     }),
   }),
-  graphql(user, { options: { forceFetch: true } }),
-  graphql(logIn, {
+  graphql(logInWithFacebook, {
     props: ({ mutate }) => ({
-      logIn: ({ email, password }) => mutate({ variables: { email, password } }),
+      logInWithFacebook: ({ accessToken, email, facebookId, firstName, lastName, refreshToken }) =>
+        mutate({
+          variables: {
+            accessToken,
+            email,
+            facebookId,
+            firstName,
+            lastName,
+            refreshToken,
+          },
+        }),
+    }),
+  }),
+  graphql(logInWithGoogle, {
+    props: ({ mutate }) => ({
+      logInWithGoogle: ({ accessToken, email, googleId, firstName, lastName, refreshToken }) =>
+        mutate({
+          variables: {
+            accessToken,
+            email,
+            googleId,
+            firstName,
+            lastName,
+            refreshToken,
+          },
+        }),
     }),
   }),
   reduxForm({

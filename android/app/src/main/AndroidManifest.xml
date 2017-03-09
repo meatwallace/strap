@@ -18,11 +18,25 @@
       android:theme="@style/AppTheme">
       <activity
         android:name=".MainActivity"
+        android:launchMode="singleTask"
         android:label="@string/app_name"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        <!-- Deep linking schemes -->
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="com.googleusercontent.apps.856839298791-b34dq123a5l2rmnp2vbaudftk8oaqovp" />
+        </intent-filter>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="fb1803893939861286" />
         </intent-filter>
       </activity>
       <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />

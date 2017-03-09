@@ -1,8 +1,12 @@
 import React from 'react';
 import { Body, Header as HeaderNB, Title, View } from 'native-base';
+import variables from '@common/styles/variables';
+
+const { primary } = variables;
 
 const styles = {
   container: {
+    backgroundColor: primary,
     maxHeight: 64,
     minHeight: 64,
   },
@@ -18,7 +22,7 @@ const Header = () => (
   <View style={styles.container}>
     <HeaderNB>
       <Body style={styles.body}>
-        <Title>strap</Title>
+        <Title>Title</Title>
       </Body>
     </HeaderNB>
   </View>

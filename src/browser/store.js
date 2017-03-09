@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
-import history from './config/history';
+import history from '@common/config/history';
 import middleware from './middleware';
 import reducer from './reducers';
 

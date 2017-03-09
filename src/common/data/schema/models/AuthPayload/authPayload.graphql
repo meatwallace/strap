@@ -1,6 +1,0 @@
-#import '../User/user.graphql'
-
-type AuthPayload {
-  token: String
-  data: User
-}

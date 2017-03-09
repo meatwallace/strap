@@ -1,11 +1,14 @@
-const cssImport = require('postcss-import');
-const cssNext = require('postcss-cssnext');
-const modularScale = require('postcss-modular-scale');
-
 module.exports = {
   plugins: [
-    cssImport,
-    cssNext,
-    modularScale,
+    require('postcss-import'),
+    require('postcss-cssnext')({
+      features: {
+        customProperties: {
+          // Loads our style object as global custom variables
+          variables: require('./src/common/styles/variables.js'),
+        },
+      },
+    }),
+    require('postcss-modular-scale'),
   ],
 };

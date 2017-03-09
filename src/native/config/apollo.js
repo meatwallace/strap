@@ -1,12 +1,17 @@
-import ApolloClient, { createNetworkInterface } from 'apollo-client';
+import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client';
 import { AsyncStorage } from 'react-native';
-import config from './config';
+import settings from '@common/settings';
 
-const networkInterface = createNetworkInterface({ uri: config.get('graphQL') });
+const { graphQLEndpoint } = settings;
+
+const batchingNetworkInterface = createBatchingNetworkInterface({
+  uri: graphQLEndpoint,
+  batchInterval: 10,
+});
 
 /* eslint-disable no-param-reassign */
-networkInterface.use([{
-  async applyMiddleware(req, next) {
+batchingNetworkInterface.use([{
+  async applyBatchMiddleware(req, next) {
     const token = await AsyncStorage.getItem('token');
 
     if (!req.options.headers) {
@@ -17,14 +22,15 @@ networkInterface.use([{
       req.options.headers.authorization = token;
     }
 
-    next();
+    return next();
   },
 }]);
 /* eslint-enable */
 
 const client = new ApolloClient({
-  networkInterface,
-  dataIdFromObject: o => o._id,
+  dataIdFromObject: o => o.id,
+  networkInterface: batchingNetworkInterface,
+  queryDeduplication: true,
 });
 
 export default client;

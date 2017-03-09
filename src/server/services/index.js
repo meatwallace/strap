@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import config from '../config/config';
 import auth from './authentication';
 import graphql from './graphql';
 import todos from './todos';
@@ -9,13 +8,19 @@ import viewer from './viewer';
 export default function services() {
   const app = this;
 
-  const { user, pass, servers, database, ssl } = config.get('mongo');
+  const { user, pass, servers, database, ssl } = app.get('mongo');
+  let serversString;
 
-  const serversString = servers.reduce((string, server) => `${string},${server}`);
+  if (Array.isArray(servers)) {
+    serversString = servers.reduce((string, server) => `${string},${server}`);
+  } else {
+    serversString = servers;
+  }
+
   const sslVal = ssl ? 'true' : 'false';
   const connection = `mongodb://${user}:${pass}@${serversString}/${database}?ssl=${sslVal}`;
 
-  mongoose.connect(connection, { mongos: true }, (err) => {
+  mongoose.connect(connection, { mongos: Array.isArray(servers) }, (err) => {
     if (err) {
       console.log(err);
     } else {

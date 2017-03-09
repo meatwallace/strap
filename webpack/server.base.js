@@ -2,6 +2,7 @@ import fs from 'fs';
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import { resolve } from 'path';
+import { presets } from './constants';
 import universalBase from './universal.babel';
 
 const externals = fs.readdirSync('node_modules').reduce((accum, mod) => {
@@ -17,8 +18,25 @@ module.exports = function config() {
   const serverConfig = {
     externals,
     context: resolve(__dirname, '../src/server'),
+    entry: {
+      main: [
+        './index.js',
+      ],
+    },
+    module: {
+      rules: [{
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          presets,
+          babelrc: false,
+        },
+      }],
+    },
     output: {
-      path: resolve(__dirname, '../dist/server'),
+      filename: '[name].js',
+      path: resolve(__dirname, '../dist/api'),
       publicPath: '/',
     },
     plugins: [

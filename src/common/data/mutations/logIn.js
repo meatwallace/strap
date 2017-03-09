@@ -5,8 +5,10 @@ export default gql`
     logIn(email: $email, password: $password) {
       token
       data {
-        _id
+        id
         email
+        facebookId
+        googleId
       }
     }
   }

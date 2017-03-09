@@ -1,0 +1,34 @@
+type Mutation {
+  # User
+  signUp (
+    email: String!
+    password: String!
+  ): AuthPayload
+
+  logIn (
+    email: String!
+    password: String!
+  ): AuthPayload
+
+  logInWithToken (
+    token: String!
+  ): AuthPayload
+
+  logInWithGoogle (
+    accessToken: String!
+    email: String
+    firstName: String
+    googleId: String!
+    lastName: String
+    refreshToken: String
+  ): AuthPayload
+
+  logInWithFacebook (
+    accessToken: String!
+    email: String
+    facebookId: String!
+    firstName: String
+    lastName: String
+    refreshToken: String
+  ): AuthPayload
+}

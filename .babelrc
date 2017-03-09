@@ -1,12 +1,7 @@
-// This is only used for react-native
-// We generate our babel config via Webpack for everything else
+// This is only used for React Native
+// For everything else, Webpack is used to configure Babel
 {
   "presets": [
-    "babel-preset-exponent"
-  ],
-  "env": {
-    "development": {
-      "plugins": ["transform-react-jsx-source"]
-    }
-  }
+    "react-native"
+  ]
 }

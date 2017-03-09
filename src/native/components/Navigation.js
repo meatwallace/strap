@@ -8,18 +8,18 @@ const NAV_TYPES = {
     label: 'Home',
     to: '/home',
   },
-  todos: {
-    icon: 'md-checkmark-circle-outline',
-    label: 'Todos',
-    to: '/todos',
+  home2: {
+    icon: 'md-home',
+    label: 'Home',
+    to: '/home',
   },
-  info: {
-    icon: 'md-information-circle',
-    label: 'Info',
-    to: '/info',
+  home3: {
+    icon: 'md-home',
+    label: 'Home',
+    to: '/home',
   },
   logout: {
-    icon: 'md-exit',
+    icon: 'md-log-out',
     label: 'Log out',
     to: '/logout',
   },
@@ -36,8 +36,8 @@ const styles = {
 const Navigation = () => (
   <View style={styles.container}>
     <NavItem {...NAV_TYPES.home} />
-    <NavItem {...NAV_TYPES.todos} />
-    <NavItem {...NAV_TYPES.info} />
+    <NavItem {...NAV_TYPES.home2} />
+    <NavItem {...NAV_TYPES.home3} />
     <NavItem {...NAV_TYPES.logout} />
   </View>
 );

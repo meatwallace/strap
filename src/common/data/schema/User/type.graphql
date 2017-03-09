@@ -1,0 +1,11 @@
+type User {
+  id: ID!
+  facebookId: String
+  googleId: String
+  email: String
+  firstName: String
+  lastName: String
+
+  createdAt: String!
+  updatedAt: String
+}

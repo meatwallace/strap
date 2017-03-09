@@ -1,0 +1,6 @@
+type Query {
+  # User
+  currentUser: User
+  user(email: String!): User
+  users: [User]
+}

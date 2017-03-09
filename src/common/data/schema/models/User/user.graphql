@@ -1,7 +1,0 @@
-#import '../Todo/todo.graphql'
-
-type User {
-  _id: String!
-  email: String!
-  todos: [Todo]
-}

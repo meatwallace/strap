@@ -3,8 +3,75 @@ import { Button, Form, Icon, Text, View } from 'native-base';
 import { AsyncStorage } from 'react-native';
 import { Link } from 'react-router-native';
 import { Field } from 'redux-form';
+import { google, facebook } from 'react-native-simple-auth';
+import variables from '@common/styles/variables';
+import settings from '@common/settings';
+import FullLayout from './Layouts/Full';
 import Input from './Input';
-import styles from './Form.styles';
+import Badge from './Badge';
+
+const {
+  google: {
+    appId: googleAppId,
+    callback: googleCallback,
+  },
+  facebook: {
+    appId: facebookAppId,
+    callback: facebookCallback,
+  },
+} = settings;
+
+const { facebookBlue, googleRed } = variables;
+
+const styles = {
+  header: {
+    alignItems: 'center',
+    flex: 3,
+    justifyContent: 'center',
+  },
+  content: {
+    flex: 6,
+  },
+  footer: {
+    alignItems: 'flex-end',
+    flexDirection: 'row',
+    maxHeight: 30,
+    justifyContent: 'space-between',
+  },
+  social: {
+    marginBottom: 5,
+  },
+  facebook: {
+    backgroundColor: facebookBlue,
+  },
+  google: {
+    backgroundColor: googleRed,
+  },
+  divider: {
+    alignSelf: 'center',
+    color: '#777',
+    marginBottom: 5,
+  },
+  form: {
+    alignItems: 'stretch',
+  },
+  icon: {
+    color: '#777',
+    flex: 1,
+    maxWidth: 40,
+    paddingLeft: 10,
+  },
+  group: {
+    marginBottom: 5,
+    marginLeft: 0,
+  },
+  input: {
+
+  },
+  submit: {},
+};
+
+// TODO: Loading spinner for mutation
 
 class SignUp extends Component {
   static contextTypes = {
@@ -14,63 +81,109 @@ class SignUp extends Component {
   }
 
   static propTypes = {
-    data: PropTypes.shape({
-      loading: PropTypes.bool.isRequired,
-      user: PropTypes.object,
-    }).isRequired,
     handleSubmit: PropTypes.func.isRequired,
+    logInWithFacebook: PropTypes.func.isRequired,
+    logInWithGoogle: PropTypes.func.isRequired,
     signUp: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
   }
 
-  static defaultProps = {}
-
-  shouldComponentUpdate(nextProps) {
-    const { data: { user } } = nextProps;
-    const { router } = this.context;
-
-    if (user) {
-      router.push('/home');
-
-      return false;
-    }
-
-    return true;
-  }
-
   submit = async ({ email, password }) => {
     const { router } = this.context;
-    const { logIn, signUp } = this.props;
+    const { signUp } = this.props;
 
     try {
-      await signUp({ email, password });
+      const { data: { logIn: { token } } } = await signUp({ email, password });
 
-      const { data: { logIn: { token } } } = await logIn({ email, password });
+      await AsyncStorage.setItem('token', token);
+
+      router.push('/warning');
+    } catch (e) {
+      console.log('TODO: SignUp error handling');
+      console.log(e);
+    }
+  }
+
+  signUpWithFacebook = async () => {
+    const { router } = this.context;
+    const { logInWithFacebook } = this.props;
+
+    try {
+      const { user, credentials } = await facebook({
+        appId: facebookAppId,
+        callback: facebookCallback,
+      });
+
+      const { data: { logInWithFacebook: { token } } } = await logInWithFacebook({
+        email: user.email,
+        facebookId: user.id,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        accessToken: credentials.access_token,
+      });
 
       await AsyncStorage.setItem('token', token);
 
       router.push('/home');
     } catch (e) {
-      // TODO: Error handling
+      console.log('TODO: Facebook sign in error handling');
+      console.log(e);
+    }
+  }
+
+  signUpWithGoogle = async () => {
+    const { router } = this.context;
+    const { logInWithGoogle } = this.props;
+
+    try {
+      const { user, credentials } = await google({
+        appId: googleAppId,
+        callback: googleCallback,
+      });
+
+      const { data: { logInWithGoogle: { token } } } = await logInWithGoogle({
+        email: user.email,
+        googleId: user.id,
+        firstName: user.given_name,
+        lastName: user.family_name,
+        accessToken: credentials.access_token,
+        refreshToken: credentials.refresh_token,
+      });
+
+      await AsyncStorage.setItem('token', token);
+
+      router.push('/home');
+    } catch (e) {
+      console.log('TODO: Google sign in error handling');
+      console.log(e);
     }
   }
 
   render() {
-    const { handleSubmit, submitting, data: { loading } } = this.props;
-
-    if (loading) {
-      return <Text>Loading</Text>;
-    }
+    const { handleSubmit, submitting } = this.props;
 
     return (
-      <View style={styles.container}>
+      <FullLayout>
+        <View style={styles.header}>
+          <Badge />
+        </View>
         <View style={styles.content}>
-          <Button full iconLeft style={{ ...styles.social, ...styles.facebook }}>
-            <Icon name="logo-facebook" />
+          <Button
+            full
+            iconLeft
+            style={{ ...styles.social, ...styles.facebook }}
+            onPress={this.signUpWithFacebook}
+          >
+            <Icon name="logo-facebook" color="#fff" />
             <Text>Sign up with Facebook</Text>
           </Button>
-          <Button full iconLeft style={{ ...styles.social, ...styles.google }}>
-            <Icon name="logo-google" />
+          <Button
+            full
+            iconLeft
+            style={{ ...styles.social, ...styles.google }}
+            onPress={this.signUpWithGoogle}
+          >
+            <Icon name="logo-google" color="#fff" />
             <Text>Sign up with Google</Text>
           </Button>
           <Text style={styles.divider}>OR</Text>
@@ -79,7 +192,7 @@ class SignUp extends Component {
               autoCapitalize="none"
               autoCorrect={false}
               component={Input}
-              icon="mail"
+              icon="md-mail"
               keyboardType="email-address"
               name="email"
               placeholder="Email"
@@ -90,7 +203,7 @@ class SignUp extends Component {
               autoCapitalize="none"
               autoCorrect={false}
               component={Input}
-              icon="lock"
+              icon="md-lock"
               name="password"
               secureTextEntry
               placeholder="Password"
@@ -116,7 +229,7 @@ class SignUp extends Component {
             <Text light>RESET PASSWORD</Text>
           </Link>
         </View>
-      </View>
+      </FullLayout>
     );
   }
 }

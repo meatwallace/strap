@@ -1,6 +1,6 @@
-import { print } from 'graphql-tag/printer';
-import rootSchema from './schema.graphql';
+import { print } from 'graphql';
+import rootSchema from './rootSchema.graphql';
 
-export { default as resolvers } from './schema';
+export { default as resolvers } from './rootSchema';
 
 export const schema = print(rootSchema);

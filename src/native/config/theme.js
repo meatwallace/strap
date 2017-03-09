@@ -18,7 +18,7 @@ export default {
   badgePadding: (Platform.OS === 'ios') ? 3 : 0,
 
     // Button
-  btnFontFamily: (Platform.OS === 'ios') ? 'SanFrancisco-Bold' : 'Roboto-Bold',
+  btnFontFamily: (Platform.OS === 'ios') ? 'System' : 'Roboto',
   btnDisabledBg: '#b5b5b5',
   btnDisabledClr: '#f1f1f1',
 
@@ -104,7 +104,7 @@ export default {
   brandSidebar: '#252932',
 
     // Font
-  fontFamily: (Platform.OS === 'ios') ? 'SanFrancisco' : 'Roboto',
+  fontFamily: (Platform.OS === 'ios') ? 'System' : 'Roboto',
   fontSizeBase: 14,
 
   get fontSizeH1() {
@@ -154,10 +154,10 @@ export default {
 
 
     // Icon
-  iconFamily: 'MaterialIcons',
-  iconFontSize: (Platform.OS === 'ios') ? 30 : 28,
-  iconMargin: 7,
-  iconHeaderSize: (Platform.OS === 'ios') ? 33 : 28,
+  // iconFamily: 'MaterialIcons',
+  // iconFontSize: (Platform.OS === 'ios') ? 30 : 28,
+  // iconMargin: 7,
+  // iconHeaderSize: (Platform.OS === 'ios') ? 33 : 28,
 
 
     // InputGroup
@@ -240,7 +240,7 @@ export default {
   noteFontSize: 14,
 
     // Title
-  titleFontfamily: (Platform.OS === 'ios') ? 'SanFrancisco' : 'Roboto-Bold',
+  titleFontfamily: (Platform.OS === 'ios') ? 'System' : 'Roboto',
   titleFontSize: (Platform.OS === 'ios') ? 17 : 19,
   subTitleFontSize: (Platform.OS === 'ios') ? 12 : 14,
   subtitleColor: (Platform.OS === 'ios') ? '#8e8e93' : '#FFF',

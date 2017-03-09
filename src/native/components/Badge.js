@@ -14,7 +14,7 @@ Badge.propTypes = {
 };
 
 Badge.defaultProps = {
-  size: 150,
+  size: 100,
 };
 
 export default Badge;

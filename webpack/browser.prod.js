@@ -9,7 +9,10 @@ module.exports = function config() {
   const prodConfig = {
     devtool: 'cheap-module-source-map',
     entry: {
-      main: './index.js',
+      main: [
+        'babel-polyfill',
+        './index.js',
+      ],
     },
     module: {
       rules: [{
@@ -23,6 +26,7 @@ module.exports = function config() {
     },
     output: {
       filename: '[name].[chunkhash].js',
+      sourceMapFilename: '[name].[chunkhash].map',
     },
     plugins: [
       new webpack.DefinePlugin({
@@ -30,6 +34,15 @@ module.exports = function config() {
           NODE_ENV: JSON.stringify('production'),
         },
       }),
+      new webpack.LoaderOptionsPlugin({
+        minimize: true,
+        debug: false,
+      }),
+      new webpack.optimize.CommonsChunkPlugin({
+        names: 'vendor',
+        minChunks: ({ context }) => context && context.indexOf('node_modules') !== -1,
+      }),
+      new webpack.HashedModuleIdsPlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new HTMLWebpackPlugin({ filename: '200.html' }),
     ],
