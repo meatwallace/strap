@@ -12,7 +12,7 @@
     "build:android:dev": "react-native run-android",
     "test": "jest --watch --coverage",
     "test-ci": "jest --bail --coverage",
-    "lint": "prettier-eslint src/**/*.js --write; stylelint ./src/**/*.css",
+    "lint": "prettier-eslint src/**/*.js --write; stylefmt -r src/**/*.css",
     "clean-cache": "watchman watch-del-all && rm -rf node_modules/ && yarn cache clean && yarn"
   },
   "repository": {
