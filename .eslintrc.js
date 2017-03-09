@@ -6,7 +6,14 @@ module.exports = {
     node: true,
   },
   parser: 'babel-eslint',
-  extends: 'airbnb',
+  extends: [
+    'airbnb',
+    'prettier',
+    'prettier/react',
+  ],
+  plugins: [
+    'prettier',
+  ],
   rules: {
     'import/extensions': 0,
     'import/no-dynamic-require': 0,

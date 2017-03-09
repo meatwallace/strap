@@ -12,12 +12,7 @@ export const initialState = {};
 export const store = createStore(
   connectRouter(history)(reducer),
   initialState,
-  composeEnhancers(
-    applyMiddleware(
-      routerMiddleware(history),
-      ...middleware,
-    ),
-  ),
+  composeEnhancers(applyMiddleware(routerMiddleware(history), ...middleware)),
 );
 
 export default store;

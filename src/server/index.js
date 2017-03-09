@@ -30,7 +30,7 @@ app
   .configure(middleware);
 
 // Start listening
-app.listen(port, host, (err) => {
+app.listen(port, host, err => {
   if (err) {
     console.info(`${appName}: ${err}`);
   } else {
