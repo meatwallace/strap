@@ -5,6 +5,8 @@ dist/
 .env
 
 # Misc
+web-bundle-report.html
+
 *.log
 
 # OSX
