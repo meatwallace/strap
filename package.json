@@ -123,7 +123,7 @@
     "react-native-config": "^0.3.1",
     "react-native-simple-auth": "2.0.0",
     "react-redux": "^5.0.3",
-    "react-router": "4.0.0-beta.5",
+    "react-router": "4.0.0",
     "react-router-native": "4.0.0",
     "redux": "^3.6.0",
     "redux-form": "^6.5.0",
