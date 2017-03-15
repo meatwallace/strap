@@ -3,7 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer as HotReload } from 'react-hot-loader';
 import { ApolloProvider } from 'react-apollo';
-import { connectRouter } from 'connected-react-router';
 import client from '@common/config/apollo';
 import history from '@common/config/history';
 import getRootNode from '@common/lib/getRootNode';
@@ -30,6 +29,6 @@ if (module.hot) {
   });
 
   module.hot.accept('./reducers', () => {
-    store.replaceReducer(connectRouter(history)(reducer));
+    store.replaceReducer(reducer);
   });
 }

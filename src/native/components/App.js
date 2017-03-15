@@ -25,7 +25,7 @@ const App = () => (
       {/* Unauthed */}
       <Route path="/signup" component={SignUp} />
       <Route path="/login" component={LogIn} />
-      <Route render={() => <Redirect to="/signup" />} />
+      <Redirect to="/signup" />
     </Switch>
 
     {/* Modals */}
