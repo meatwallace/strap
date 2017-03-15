@@ -1,10 +1,10 @@
 import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client';
-import settings from '../settings';
 
-const { graphQLEndpoint } = settings;
+const host = process.env.HOST;
+const port = process.env.PORT;
 
 const batchingNetworkInterface = createBatchingNetworkInterface({
-  uri: graphQLEndpoint,
+  uri: `http://${host}:${port}/graphql`,
   batchInterval: 10,
 });
 
@@ -27,7 +27,7 @@ batchingNetworkInterface.use([{
 /* eslint-enable */
 
 const client = new ApolloClient({
-  dataIdFromObject: o => o.id,
+  dataIdFromObject: o => o._id,
   networkInterface: batchingNetworkInterface,
 });
 

@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import Dotenv from 'dotenv-webpack';
 
 // Has to end in .babel.js to work with ESlint resolver
 module.exports = function config() {
@@ -15,5 +16,8 @@ module.exports = function config() {
         '@common': resolve(__dirname, '../src/common'),
       },
     },
+    plugins: [
+      new Dotenv(),
+    ],
   };
 };

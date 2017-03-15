@@ -8,19 +8,7 @@ import viewer from './viewer';
 export default function services() {
   const app = this;
 
-  const { user, pass, servers, database, ssl } = app.get('mongo');
-  let serversString;
-
-  if (Array.isArray(servers)) {
-    serversString = servers.reduce((string, server) => `${string},${server}`);
-  } else {
-    serversString = servers;
-  }
-
-  const sslVal = ssl ? 'true' : 'false';
-  const connection = `mongodb://${user}:${pass}@${serversString}/${database}?ssl=${sslVal}`;
-
-  mongoose.connect(connection, { mongos: Array.isArray(servers) }, (err) => {
+  mongoose.connect(process.env.MONGO_CONNECTION_STRING, {}, (err) => {
     if (err) {
       console.log(err);
     } else {
