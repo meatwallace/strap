@@ -37,7 +37,7 @@ module.exports = function config() {
     },
     output: {
       filename: '[name].js',
-      path: resolve(__dirname, '../dist/api'),
+      path: resolve(__dirname, '../dist/server'),
       publicPath: '/',
     },
     plugins: [

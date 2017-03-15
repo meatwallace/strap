@@ -18,10 +18,10 @@ GOOGLE_NATIVE_CALLBACK=com.googleusercontent.apps.856839298791-b34dq123a5l2rmnp2
 # API KEYS
 SEGMENT_KEY=
 
-######################################
-# PRIVATE - DO NOT include on Travis #
-# Implement as real environment vars #
-######################################
+##################################
+# PRIVATE - DO NOT include in CI #
+# Implement as zeit.now secrets  #
+##################################
 # SERVER
 TOKEN=A_SECRET_FOR_YOUR_JWT_AUTH
 FACEBOOK_CLIENT_ID=1803893939861286
