@@ -20,6 +20,7 @@ module.exports = function config() {
     context: resolve(__dirname, '../src/server'),
     entry: {
       main: [
+        'babel-polyfill',
         './index.js',
       ],
     },
