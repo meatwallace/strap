@@ -1,6 +1,7 @@
 import webpack from 'webpack';
 import merge from 'webpack-merge';
 import HTMLWebpackPlugin from 'html-webpack-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import base from './browser.base';
 import { presets } from './constants';
 
@@ -29,11 +30,6 @@ module.exports = function config() {
       sourceMapFilename: '[name].[chunkhash].map',
     },
     plugins: [
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
-      }),
       new webpack.LoaderOptionsPlugin({
         minimize: true,
         debug: false,
@@ -45,6 +41,10 @@ module.exports = function config() {
       new webpack.HashedModuleIdsPlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new HTMLWebpackPlugin({ filename: '200.html' }),
+      new BundleAnalyzerPlugin({
+        analyzerMode: 'static',
+        reportFilename: '../../web-bundle-report.html',
+      }),
     ],
   };
 

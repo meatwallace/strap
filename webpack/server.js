@@ -20,6 +20,7 @@ module.exports = function config() {
     context: resolve(__dirname, '../src/server'),
     entry: {
       main: [
+        'babel-polyfill',
         './index.js',
       ],
     },
@@ -36,7 +37,7 @@ module.exports = function config() {
     },
     output: {
       filename: '[name].js',
-      path: resolve(__dirname, '../dist/api'),
+      path: resolve(__dirname, '../dist/server'),
       publicPath: '/',
     },
     plugins: [

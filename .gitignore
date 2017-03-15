@@ -2,9 +2,11 @@ coverage/
 dist/
 
 # Settings
-/settings.js
+.env
 
 # Misc
+web-bundle-report.html
+
 *.log
 
 # OSX

@@ -7,12 +7,35 @@ import { Strategy as GoogleTokenStrategy } from 'passport-google-token';
 export default function auth() {
   const app = this;
 
-  const config = app.get('auth');
-
-  config.facebook.strategy = FacebookStrategy;
-  config.facebook.tokenStrategy = FacebookTokenStrategy;
-  config.google.strategy = GoogleStrategy;
-  config.google.tokenStrategy = GoogleTokenStrategy;
+  const config = {
+    idField: '_id',
+    token: {
+      secret: process.env.TOKEN,
+    },
+    local: {},
+    facebook: {
+      clientID: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+      permissions: {
+        authType: 'rerequest',
+        scope: [
+          'public_profile',
+          'email',
+        ],
+      },
+      strategy: FacebookStrategy,
+      tokenStrategy: FacebookTokenStrategy,
+    },
+    google: {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      permissions: {
+        scope: ['profile'],
+      },
+      strategy: GoogleStrategy,
+      tokenStrategy: GoogleTokenStrategy,
+    },
+  };
 
   app.configure(authentication(config));
 }

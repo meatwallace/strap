@@ -1,0 +1,33 @@
+##########
+# PUBLIC #
+##########
+# CORE
+NODE_ENV=development
+APP_NAME=strap
+
+# SERVER
+HOST=localhost
+PORT=3030
+
+# NATIVE SOCIAL AUTH
+FACEBOOK_NATIVE_APP_ID=1803893939861286
+FACEBOOK_NATIVE_CALLBACK=fb1803893939861286://authorize
+GOOGLE_NATIVE_APP_ID=856839298791-b34dq123a5l2rmnp2vbaudftk8oaqovp.apps.googleusercontent.com
+GOOGLE_NATIVE_CALLBACK=com.googleusercontent.apps.856839298791-b34dq123a5l2rmnp2vbaudftk8oaqovp:/oauth2redirect
+
+# API KEYS
+SEGMENT_KEY=
+
+##################################
+# PRIVATE - DO NOT include in CI #
+# Implement as zeit.now secrets  #
+##################################
+# SERVER
+TOKEN=A_SECRET_FOR_YOUR_JWT_AUTH
+FACEBOOK_CLIENT_ID=1803893939861286
+FACEBOOK_CLIENT_SECRET=SECRET
+GOOGLE_CLIENT_ID=856839298791-4r4uaco133st95155utoimj9ugq4ddk6.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=SECRET
+
+# DATABASE
+MONGO_CONNECTION_STRING=mongodb://127.0.0.1:27017/strap

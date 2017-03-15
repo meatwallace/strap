@@ -4,22 +4,11 @@ import { AsyncStorage } from 'react-native';
 import { Link } from 'react-router-native';
 import { Field } from 'redux-form';
 import { google, facebook } from 'react-native-simple-auth';
+import config from 'react-native-config';
 import variables from '@common/styles/variables';
-import settings from '@common/settings';
 import FullLayout from './Layouts/Full';
 import Input from './Input';
 import Badge from './Badge';
-
-const {
-  google: {
-    appId: googleAppId,
-    callback: googleCallback,
-  },
-  facebook: {
-    appId: facebookAppId,
-    callback: facebookCallback,
-  },
-} = settings;
 
 const { facebookBlue, googleRed } = variables;
 
@@ -110,8 +99,8 @@ class SignUp extends Component {
 
     try {
       const { user, credentials } = await facebook({
-        appId: facebookAppId,
-        callback: facebookCallback,
+        appId: config.FACEBOOK_NATIVE_APP_ID,
+        callback: config.FACEBOOK_NATIVE_CALLBACK,
       });
 
       const { data: { logInWithFacebook: { token } } } = await logInWithFacebook({
@@ -137,8 +126,8 @@ class SignUp extends Component {
 
     try {
       const { user, credentials } = await google({
-        appId: googleAppId,
-        callback: googleCallback,
+        appId: config.GOOGLE_NATIVE_APP_ID,
+        callback: config.GOOGLE_NATIVE_CALLBACK,
       });
 
       const { data: { logInWithGoogle: { token } } } = await logInWithGoogle({

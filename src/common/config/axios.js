@@ -1,7 +1,7 @@
 import axios from 'axios';
-import settings from '../settings';
 
-const { host, port } = settings;
+const host = process.env.HOST;
+const port = process.env.PORT;
 
 const axiosConfig = process.env.NODE_ENV !== 'development' ? {} : {
   baseUrl: `http://${host}:${port}`,
