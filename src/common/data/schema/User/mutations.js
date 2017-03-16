@@ -34,7 +34,7 @@ export default function mutations(app) {
         // how do we handle that? Need to apply it to our Facebook login, too
         const user = existingUser.data[0];
 
-        await user.update(userData);
+        await Users.patch(user._id, userData);
 
       // We have no existing user
       } else {
@@ -50,15 +50,20 @@ export default function mutations(app) {
 
       return result.data;
     },
-    async logInWithFacebook(root, { accessToken, email, facebookId, refreshToken }, context) {
+    async logInWithFacebook(root, args, context) {
+      const { accessToken, email, firstName, facebookId, lastName, refreshToken } = args;
       // Look for a user by email
       const existingUser = await Users.find({ query: { email } });
+
+      const userData = { email, firstName, facebookId, lastName };
 
       // If we have an existing user
       if (existingUser.total > 0) {
         const user = existingUser.data[0];
 
-        await user.update({ email, facebookId });
+        console.log(user);
+
+        await Users.patch(user._id, userData);
 
       // We have no existing user
       } else {
@@ -69,7 +74,7 @@ export default function mutations(app) {
       // Authenticate with our token
       const result = await axios.post('/auth/facebook', {
         access_token: accessToken,
-        refresh_token: refreshToken,
+        // refresh_token: refreshToken,
       });
 
       return result.data;

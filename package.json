@@ -8,7 +8,7 @@
     "deploy:server": "npm run build:server:prod; cp package.json now.json dist/server; now dist/server",
     "build:browser:dev": "webpack-dev-server --progress --env 'browser.dev'",
     "build:browser:prod": "webpack --progress --env 'browser.prod'",
-    "build:server:dev": "webpack --watch --progress --env 'server' & nodemon ./dist/api/main.js",
+    "build:server:dev": "webpack --watch --progress --env 'server' & nodemon ./dist/server/main.js",
     "build:server:prod": "webpack --progress --env 'server'",
     "build:ios:dev": "react-native run-ios",
     "build:android:dev": "react-native run-android",

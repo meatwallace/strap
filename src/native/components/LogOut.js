@@ -3,26 +3,20 @@ import ApolloClient from 'apollo-client';
 import { AsyncStorage } from 'react-native';
 
 class LogOut extends Component {
-  static contextTypes = {
-    router: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-  }
-
   static propTypes = {
     client: PropTypes.instanceOf(ApolloClient).isRequired,
+    history: PropTypes.object.isRequired,
   }
 
   async componentWillMount() {
-    const { router } = this.context;
-    const { client } = this.props;
+    const { client, history } = this.props;
 
     // Wipe Apollo's cache
     await client.resetStore();
 
     await AsyncStorage.removeItem('token');
 
-    router.push('/login');
+    history.push('/login');
   }
 
   render() {

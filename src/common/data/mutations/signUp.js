@@ -11,7 +11,7 @@ export default gql`
     ) {
       token
       data {
-        id
+        _id
         email
       }
     }
