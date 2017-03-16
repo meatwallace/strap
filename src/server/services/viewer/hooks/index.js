@@ -1,12 +1,11 @@
-import { hooks as auth } from 'feathers-authentication';
-import hooks from 'feathers-hooks';
-// import globalHooks from '../../../hooks';
+import { hooks as authHooks } from 'feathers-authentication';
+import { remove } from 'feathers-hooks';
+
+const { authenticate } = authHooks;
 
 export const before = {
   all: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
+    authenticate('jwt'),
   ],
   find: [],
   get: [],
@@ -18,7 +17,7 @@ export const before = {
 
 export const after = {
   all: [
-    hooks.remove('password'),
+    remove('password'),
   ],
   find: [],
   get: [],

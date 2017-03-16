@@ -1,10 +1,17 @@
 import mongoose from 'mongoose';
 
 const User = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
-  googleId: { type: String, unique: true },
-  facebookId: { type: String, unique: true },
+  email: { type: String, unique: true },
+  password: { type: String },
+  googleId: { type: String },
+  gender: { type: String },
+  firstName: { type: String },
+  lastName: { type: String },
+  google: { type: mongoose.Schema.Types.Mixed },
+  facebook: { type: mongoose.Schema.Types.Mixed },
+  facebookId: { type: String },
+  permissions: { type: Array, default: [] },
+  roles: { type: Array, default: [] },
 }, {
   timestamps: true,
 });

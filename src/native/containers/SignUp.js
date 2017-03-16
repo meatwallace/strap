@@ -28,14 +28,10 @@ export default compose(
   }),
   graphql(logInWithFacebook, {
     props: ({ mutate }) => ({
-      logInWithFacebook: ({ accessToken, email, facebookId, firstName, lastName, refreshToken }) =>
+      logInWithFacebook: ({ accessToken, refreshToken }) =>
         mutate({
           variables: {
             accessToken,
-            email,
-            facebookId,
-            firstName,
-            lastName,
             refreshToken,
           },
         }),
@@ -43,14 +39,10 @@ export default compose(
   }),
   graphql(logInWithGoogle, {
     props: ({ mutate }) => ({
-      logInWithGoogle: ({ accessToken, email, googleId, firstName, lastName, refreshToken }) =>
+      logInWithGoogle: ({ accessToken, refreshToken }) =>
         mutate({
           variables: {
             accessToken,
-            email,
-            googleId,
-            firstName,
-            lastName,
             refreshToken,
           },
         }),

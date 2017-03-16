@@ -1,33 +1,17 @@
-import { hooks as auth } from 'feathers-authentication';
-// import hooks from 'feathers-hooks';
-// import globalHooks from '../../../hooks';
+import { hooks as authHooks } from 'feathers-authentication';
 
-const authed = [
-  auth.verifyToken(),
-  auth.populateUser(),
-  auth.restrictToAuthenticated(),
-];
+const { authenticate } = authHooks;
 
 export const before = {
-  all: [],
+  all: [
+    authenticate('jwt'),
+  ],
   find: [],
   get: [],
-  create: [
-    ...authed,
-    auth.associateCurrentUser({ as: 'authorId' }),
-  ],
-  update: [
-    ...authed,
-    auth.restrictToOwner({ ownerField: 'authorId' }),
-  ],
-  patch: [
-    ...authed,
-    auth.restrictToOwner({ ownerField: 'authorId' }),
-  ],
-  remove: [
-    ...authed,
-    auth.restrictToOwner({ ownerField: 'authorId' }),
-  ],
+  create: [],
+  update: [],
+  patch: [],
+  remove: [],
 };
 
 export const after = {

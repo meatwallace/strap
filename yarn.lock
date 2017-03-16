@@ -1399,8 +1399,8 @@ bcrypt@^0.8.0:
     nan "2.3.5"
 
 bcryptjs@^2.3.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.0.tgz#fb7f4a0b133854503fe1b2da3f25db834cf0e678"
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
 
 beeper@^1.0.0:
   version "1.1.1"
@@ -2474,7 +2474,7 @@ debug@2.3.3:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.1, debug@^2.1.1, debug@^2.2.0, debug@^2.6.0:
+debug@2.6.1, debug@^2.1.1, debug@^2.2.0, debug@^2.3.1, debug@^2.6.0:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.1.tgz#79855090ba2c4e3115cc7d8769491d58f0491351"
   dependencies:
@@ -3381,20 +3381,56 @@ fbjs@^0.8.1, fbjs@^0.8.4, fbjs@^0.8.5:
     setimmediate "^1.0.5"
     ua-parser-js "^0.7.9"
 
-feathers-authentication@^0.7.11:
-  version "0.7.12"
-  resolved "https://registry.yarnpkg.com/feathers-authentication/-/feathers-authentication-0.7.12.tgz#858e9ec3b91b8404be0e55c3f040f8489f1066a9"
+feathers-authentication-jwt@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/feathers-authentication-jwt/-/feathers-authentication-jwt-0.3.1.tgz#ef9a0c053cd015fdc20f3db9163e2c97aaa6592f"
+  dependencies:
+    debug "^2.3.1"
+    feathers-errors "^2.5.0"
+    lodash.merge "^4.6.0"
+    lodash.omit "^4.5.0"
+    lodash.pick "^4.4.0"
+    passport-jwt "^2.2.1"
+
+feathers-authentication-local@^0.3.3:
+  version "0.3.3"
+  resolved "https://registry.yarnpkg.com/feathers-authentication-local/-/feathers-authentication-local-0.3.3.tgz#fc991dcea30dbe0107d0b825c8f58d7a63b8707d"
   dependencies:
     bcryptjs "^2.3.0"
     debug "^2.2.0"
-    feathers-errors "^2.0.1"
-    feathers-hooks "^1.5.0"
-    jsonwebtoken "^5.4.0"
-    lodash.isplainobject "^4.0.4"
-    passport "^0.3.0"
+    feathers-errors "^2.4.0"
+    lodash.get "^4.4.2"
+    lodash.merge "^4.6.0"
+    lodash.omit "^4.5.0"
+    lodash.pick "^4.4.0"
     passport-local "^1.0.0"
 
-feathers-commons@^0.8.0, feathers-commons@^0.8.4, feathers-commons@^0.8.6, feathers-commons@^0.8.7:
+feathers-authentication-oauth2@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.yarnpkg.com/feathers-authentication-oauth2/-/feathers-authentication-oauth2-0.2.3.tgz#083d8ba1eab21a71e2177ff8c0ed80138aec83f0"
+  dependencies:
+    debug "^2.2.0"
+    feathers-commons "^0.8.5"
+    feathers-errors "^2.4.0"
+    feathers-rest "^1.5.2"
+    lodash.merge "^4.6.0"
+
+feathers-authentication@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/feathers-authentication/-/feathers-authentication-1.1.1.tgz#b3bf7a953eeed92aae83bff22e1f53bfcf77f47d"
+  dependencies:
+    debug "^2.2.0"
+    feathers-commons "^0.8.4"
+    feathers-errors "^2.4.0"
+    feathers-socket-commons "^2.3.1"
+    jsonwebtoken "^7.1.9"
+    lodash.merge "^4.6.0"
+    lodash.omit "^4.5.0"
+    lodash.pick "^4.4.0"
+    ms "^0.7.1"
+    passport "^0.3.2"
+
+feathers-commons@^0.8.0, feathers-commons@^0.8.4, feathers-commons@^0.8.5, feathers-commons@^0.8.6, feathers-commons@^0.8.7:
   version "0.8.7"
   resolved "https://registry.yarnpkg.com/feathers-commons/-/feathers-commons-0.8.7.tgz#11c6f25b537745a983e8d61552d7db8932d53782"
 
@@ -3405,7 +3441,7 @@ feathers-configuration@^0.4.1:
     config "^1.21.0"
     debug "^2.2.0"
 
-feathers-errors@^2.0.1, feathers-errors@^2.2.0, feathers-errors@^2.4.0, feathers-errors@^2.6.1:
+feathers-errors@^2.0.1, feathers-errors@^2.2.0, feathers-errors@^2.4.0, feathers-errors@^2.5.0, feathers-errors@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/feathers-errors/-/feathers-errors-2.6.1.tgz#9ec76f6cdc941bf1921455fd46b2422edd1f15a6"
   dependencies:
@@ -3419,7 +3455,7 @@ feathers-hooks-common@^2.0.3:
     feathers-errors "^2.4.0"
     traverse "0.6.6"
 
-feathers-hooks@^1.5.0, feathers-hooks@^1.8.1:
+feathers-hooks@^1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/feathers-hooks/-/feathers-hooks-1.8.1.tgz#cba0c46f309cd6e368faeb4957a2dec9d7f2898f"
   dependencies:
@@ -3437,13 +3473,20 @@ feathers-mongoose@^5.0.3:
     lodash.omit "^4.3.0"
     uberproto "^1.2.0"
 
+feathers-permissions@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/feathers-permissions/-/feathers-permissions-0.1.1.tgz#d1a0e072fe3aec69fa1079b469cb9640b6243bb4"
+  dependencies:
+    debug "^2.2.0"
+    feathers-errors "^2.4.0"
+
 feathers-query-filters@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/feathers-query-filters/-/feathers-query-filters-2.1.2.tgz#cdb18224db5e19cc0140d528108e0908d5eb0654"
   dependencies:
     feathers-commons "^0.8.0"
 
-feathers-rest@^1.7.1:
+feathers-rest@^1.5.2, feathers-rest@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/feathers-rest/-/feathers-rest-1.7.1.tgz#af03bd904181e38719fb4721cb2284aaf730b927"
   dependencies:
@@ -3452,7 +3495,7 @@ feathers-rest@^1.7.1:
     feathers-errors "^2.0.1"
     qs "^6.0.1"
 
-feathers-socket-commons@^2.0.0:
+feathers-socket-commons@^2.0.0, feathers-socket-commons@^2.3.1:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/feathers-socket-commons/-/feathers-socket-commons-2.4.0.tgz#062efd57f9a8716644145b993a5f72709969f1e1"
   dependencies:
@@ -5079,15 +5122,7 @@ jsonpointer@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/jsonpointer/-/jsonpointer-4.0.1.tgz#4fd92cb34e0e9db3c89c8622ecf51f9b978c6cb9"
 
-jsonwebtoken@^5.4.0:
-  version "5.7.0"
-  resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-5.7.0.tgz#1c90f9a86ce5b748f5f979c12b70402b4afcddb4"
-  dependencies:
-    jws "^3.0.0"
-    ms "^0.7.1"
-    xtend "^4.0.1"
-
-jsonwebtoken@^7.3.0:
+jsonwebtoken@^7.0.0, jsonwebtoken@^7.1.9, jsonwebtoken@^7.3.0:
   version "7.3.0"
   resolved "https://registry.yarnpkg.com/jsonwebtoken/-/jsonwebtoken-7.3.0.tgz#85118d6a70e3fccdf14389f4e7a1c3f9c8a9fbba"
   dependencies:
@@ -5120,7 +5155,7 @@ jwa@^1.1.4:
     ecdsa-sig-formatter "1.0.9"
     safe-buffer "^5.0.1"
 
-jws@^3.0.0, jws@^3.1.4:
+jws@^3.1.4:
   version "3.1.4"
   resolved "https://registry.yarnpkg.com/jws/-/jws-3.1.4.tgz#f9e8b9338e8a847277d6444b1464f61880e050a2"
   dependencies:
@@ -5361,6 +5396,10 @@ lodash.get@^3.7.0:
     lodash._baseget "^3.0.0"
     lodash._topath "^3.0.0"
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+
 lodash.isarguments@^3.0.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/lodash.isarguments/-/lodash.isarguments-3.1.0.tgz#2f573d85c6a24289ff00663b491c1d338ff3458a"
@@ -5376,10 +5415,6 @@ lodash.isequal@^4.1.1:
 lodash.isobject@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/lodash.isobject/-/lodash.isobject-3.0.2.tgz#3c8fb8d5b5bf4bf90ae06e14f2a530a4ed935e1d"
-
-lodash.isplainobject@^4.0.4:
-  version "4.0.6"
-  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
 
 lodash.keys@^3.0.0, lodash.keys@^3.1.2:
   version "3.1.2"
@@ -5397,11 +5432,11 @@ lodash.memoize@^4.1.0, lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
-lodash.merge@^4.4.0:
+lodash.merge@^4.4.0, lodash.merge@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.0.tgz#69884ba144ac33fe699737a6086deffadd0f89c5"
 
-lodash.omit@^4.3.0:
+lodash.omit@^4.3.0, lodash.omit@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.omit/-/lodash.omit-4.5.0.tgz#6eb19ae5a1ee1dd9df0b969e66ce0b7fa30b5e60"
 
@@ -6373,6 +6408,13 @@ passport-google-token@0.1.2:
     passport-oauth "^1.0.0"
     pkginfo "0.2.x"
 
+passport-jwt@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/passport-jwt/-/passport-jwt-2.2.1.tgz#0e004c94071319d673d9d9bcfd1574a868011527"
+  dependencies:
+    jsonwebtoken "^7.0.0"
+    passport-strategy "^1.0.0"
+
 passport-local@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-local/-/passport-local-1.0.0.tgz#1fe63268c92e75606626437e3b906662c15ba6ee"
@@ -6403,11 +6445,11 @@ passport-oauth@1.0.0, passport-oauth@^1.0.0:
     passport-oauth1 "1.x.x"
     passport-oauth2 "1.x.x"
 
-passport-strategy@1.x.x:
+passport-strategy@1.x.x, passport-strategy@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/passport-strategy/-/passport-strategy-1.0.0.tgz#b5539aa8fc225a3d1ad179476ddf236b440f52e4"
 
-passport@^0.3.0, passport@^0.3.2:
+passport@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/passport/-/passport-0.3.2.tgz#9dd009f915e8fe095b0124a01b8f82da07510102"
   dependencies:

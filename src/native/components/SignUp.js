@@ -91,20 +91,16 @@ class SignUp extends Component {
     const { history, logInWithFacebook } = this.props;
 
     try {
-      const { user, credentials } = await facebook({
+      const { credentials } = await facebook({
         appId: config.FACEBOOK_NATIVE_APP_ID,
         callback: `${config.FACEBOOK_NATIVE_CALLBACK}://authorize`,
       });
 
-      const { data: { logInWithFacebook: { token } } } = await logInWithFacebook({
-        email: user.email,
-        facebookId: user.id,
-        firstName: user.first_name,
-        lastName: user.last_name,
+      const { data: { logInWithFacebook: { accessToken } } } = await logInWithFacebook({
         accessToken: credentials.access_token,
       });
 
-      await AsyncStorage.setItem('token', token);
+      await AsyncStorage.setItem('token', accessToken);
 
       history.push('/home');
     } catch (e) {
@@ -117,21 +113,17 @@ class SignUp extends Component {
     const { history, logInWithGoogle } = this.props;
 
     try {
-      const { user, credentials } = await google({
+      const { credentials } = await google({
         appId: config.GOOGLE_NATIVE_APP_ID,
         callback: `${config.GOOGLE_NATIVE_CALLBACK}:/oauth2redirect`
       });
 
-      const { data: { logInWithGoogle: { token } } } = await logInWithGoogle({
-        email: user.email,
-        googleId: user.id,
-        firstName: user.given_name,
-        lastName: user.family_name,
+      const { data: { logInWithGoogle: { accessToken } } } = await logInWithGoogle({
         accessToken: credentials.access_token,
         refreshToken: credentials.refresh_token,
       });
 
-      await AsyncStorage.setItem('token', token);
+      await AsyncStorage.setItem('token', accessToken);
 
       history.push('/home');
     } catch (e) {

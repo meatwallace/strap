@@ -16,19 +16,11 @@ type Mutation {
 
   logInWithGoogle (
     accessToken: String!
-    email: String
-    firstName: String
-    googleId: String!
-    lastName: String
     refreshToken: String
   ): AuthPayload
 
   logInWithFacebook (
     accessToken: String!
-    email: String
-    facebookId: String!
-    firstName: String
-    lastName: String
     refreshToken: String
   ): AuthPayload
 }

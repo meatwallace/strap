@@ -6,44 +6,25 @@ export default function mutations(app) {
   return {
     async signUp(root, { email, password }, context) {
       await Users.create({ email, password });
-      const result = await axios.post('/auth/local', { email, password });
+      const result = await axios.post('/authentication', { email, password });
 
       return result.data;
     },
     async logIn(root, { email, password }, context) {
-      const result = await axios.post('/auth/local', { email, password });
+      const result = await axios.post('/authentication', { email, password });
 
       return result.data;
     },
-    async logInWithToken(root, { token }, context) {
-      const result = await axios.post('/auth/token', { token });
+    async logInWithToken(root, { accessToken }, context) {
+      const result = await axios.post('/authentication', { accessToken });
 
       return result.data;
     },
     async logInWithGoogle(root, args, context) {
-      const { accessToken, email, firstName, googleId, lastName, refreshToken } = args;
-      // Look for a user by email
-      const existingUser = await Users.find({ query: { email } });
+      const { accessToken, refreshToken } = args;
 
-      const userData = { email, firstName, googleId, lastName };
-
-      // If we have an existing user
-      if (existingUser.total > 0) {
-        // TODO: Better merging logic dependant on if we have a previous account or not
-        // already mapped to our googleId. i.e. email registration, then login via google -
-        // how do we handle that? Need to apply it to our Facebook login, too
-        const user = existingUser.data[0];
-
-        await Users.patch(user._id, userData);
-
-      // We have no existing user
-      } else {
-        // Create a user
-        await Users.create(userData);
-      }
-
-      // Authenticate with our token
-      const result = await axios.post('/auth/google', {
+      const result = await axios.post('/authentication', {
+        strategy: 'google-token',
         access_token: accessToken,
         refresh_token: refreshToken,
       });
@@ -51,30 +32,12 @@ export default function mutations(app) {
       return result.data;
     },
     async logInWithFacebook(root, args, context) {
-      const { accessToken, email, firstName, facebookId, lastName, refreshToken } = args;
-      // Look for a user by email
-      const existingUser = await Users.find({ query: { email } });
+      const { accessToken, refreshToken } = args;
 
-      const userData = { email, firstName, facebookId, lastName };
-
-      // If we have an existing user
-      if (existingUser.total > 0) {
-        const user = existingUser.data[0];
-
-        console.log(user);
-
-        await Users.patch(user._id, userData);
-
-      // We have no existing user
-      } else {
-        // Create a user
-        await Users.create({ email, facebookId });
-      }
-
-      // Authenticate with our token
-      const result = await axios.post('/auth/facebook', {
+      const result = await axios.post('/authentication', {
+        strategy: 'facebook-token',
         access_token: accessToken,
-        // refresh_token: refreshToken,
+        refresh_token: refreshToken,
       });
 
       return result.data;
