@@ -1,5 +1,6 @@
 import { graphql, compose } from 'react-apollo';
 import { reduxForm } from 'redux-form';
+import { withRouter } from 'react-router-native';
 import validate from 'validate.js';
 import * as mutations from '@common/data/mutations';
 import LogIn from '../components/LogIn';
@@ -13,6 +14,7 @@ const constraints = {
 };
 
 export default compose(
+  withRouter,
   graphql(logIn, {
     props: ({ mutate }) => ({
       logIn: ({ email, password }) => mutate({ variables: { email, password } }),

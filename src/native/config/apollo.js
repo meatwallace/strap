@@ -1,8 +1,9 @@
 import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client';
 import { AsyncStorage } from 'react-native';
+import config from 'react-native-config';
 
-const host = process.env.HOST;
-const port = process.env.PORT;
+const host = config.HOST;
+const port = config.PORT;
 
 const batchingNetworkInterface = createBatchingNetworkInterface({
   uri: `http://${host}:${port}/graphql`,

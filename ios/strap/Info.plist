@@ -39,6 +39,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>fb1803893939861286</string>
+          <!-- <string>$(__RN_CONFIG_FACEBOOK_NATIVE_CALLBACK)</string> -->
         </array>
       </dict>
       <dict>
@@ -49,6 +50,7 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>com.googleusercontent.apps.856839298791-b34dq123a5l2rmnp2vbaudftk8oaqovp</string>
+          <!-- <string>$(__RN_CONFIG_GOOGLE_NATIVE_CALLBACK)</string> -->
         </array>
       </dict>
     </array>

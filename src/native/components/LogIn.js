@@ -61,30 +61,24 @@ const styles = {
 };
 
 class LogIn extends Component {
-  static contextTypes = {
-    router: PropTypes.shape({
-      push: PropTypes.func.isRequired,
-    }).isRequired,
-  }
-
   static propTypes = {
     handleSubmit: PropTypes.func.isRequired,
     logIn: PropTypes.func.isRequired,
     logInWithFacebook: PropTypes.func.isRequired,
     logInWithGoogle: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
   }
 
   submit = async ({ email, password }) => {
-    const { router } = this.context;
-    const { logIn } = this.props;
+    const { history, logIn } = this.props;
 
     try {
       const { data: { logIn: { token } } } = await logIn({ email, password });
 
       await AsyncStorage.setItem('token', token);
 
-      router.push('/warning');
+      history.push('/home');
     } catch (e) {
       console.log('TODO: LogIn error handling');
       console.log(e);
@@ -92,13 +86,12 @@ class LogIn extends Component {
   }
 
   signUpWithFacebook = async () => {
-    const { router } = this.context;
-    const { logInWithFacebook } = this.props;
+    const { history, logInWithFacebook } = this.props;
 
     try {
       const { user, credentials } = await facebook({
         appId: config.FACEBOOK_NATIVE_APP_ID,
-        callback: config.FACEBOOK_NATIVE_CALLBACK,
+        callback: `${config.FACEBOOK_NATIVE_CALLBACK}://authorize`,
       });
 
       const { data: { logInWithFacebook: { token } } } = await logInWithFacebook({
@@ -111,7 +104,7 @@ class LogIn extends Component {
 
       await AsyncStorage.setItem('token', token);
 
-      router.push('/home');
+      history.push('/home');
     } catch (e) {
       console.log('TODO: Facebook sign in error handling');
       console.log(e);
@@ -119,13 +112,12 @@ class LogIn extends Component {
   }
 
   signUpWithGoogle = async () => {
-    const { router } = this.context;
-    const { logInWithGoogle } = this.props;
+    const { history, logInWithGoogle } = this.props;
 
     try {
       const { user, credentials } = await google({
         appId: config.GOOGLE_NATIVE_APP_ID,
-        callback: config.GOOGLE_NATIVE_CALLBACK,
+        callback: `${config.GOOGLE_NATIVE_CALLBACK}:/oauth2redirect`
       });
 
       const { data: { logInWithGoogle: { token } } } = await logInWithGoogle({
@@ -139,7 +131,7 @@ class LogIn extends Component {
 
       await AsyncStorage.setItem('token', token);
 
-      router.push('/home');
+      history.push('/home');
     } catch (e) {
       console.log('TODO: Google sign in error handling');
       console.log(e);

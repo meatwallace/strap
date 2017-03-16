@@ -5,7 +5,7 @@ export default gql`
     logIn(email: $email, password: $password) {
       token
       data {
-        id
+        _id
         email
         facebookId
         googleId

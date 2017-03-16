@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
-import { Switch, Route, Redirect } from 'react-router';
-import { ConnectedRouter as Router } from 'connected-react-router';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { ConnectedRouter as Router } from 'react-router-redux';
 import DocHead from './DocHead';
 import Footer from './Footer';
 import Header from './Header';
@@ -14,9 +14,8 @@ const App = ({ history }) => (
       <Header />
       <div className={styles.content}>
         <Switch>
-          <Route exact path="/" render={() => <Redirect to="/home" />} />
-          <Route exact path="/home" render={Home} />
-          <Route render={() => <Redirect to="/home" />} />
+          <Route path="/" component={Home} />
+          <Redirect to="/" />
         </Switch>
       </div>
       <Footer />

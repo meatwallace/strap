@@ -1,6 +1,4 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import { connectRouter, routerMiddleware } from 'connected-react-router';
-import history from '@common/config/history';
 import middleware from './middleware';
 import reducer from './reducers';
 
@@ -10,9 +8,9 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 export const initialState = {};
 
 export const store = createStore(
-  connectRouter(history)(reducer),
+  reducer,
   initialState,
-  composeEnhancers(applyMiddleware(routerMiddleware(history), ...middleware)),
+  composeEnhancers(applyMiddleware(...middleware)),
 );
 
 export default store;

@@ -1,5 +1,5 @@
 type User {
-  id: ID!
+  _id: ID!
   facebookId: String
   googleId: String
   email: String
