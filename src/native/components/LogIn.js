@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 import { google, facebook } from 'react-native-simple-auth';
 import config from 'react-native-config';
 import variables from '@common/styles/variables';
+import EventTypes from '@common/config/eventTypes';
 import FullLayout from './Layouts/Full';
 import Input from './Input';
 import Badge from './Badge';
@@ -70,15 +71,39 @@ class LogIn extends Component {
     submitting: PropTypes.bool.isRequired,
   }
 
+  logInSuccess = async (payload) => {
+    const { history, trackEvent } = this.props;
+    const { accessToken, user } = payload;
+    const { firstName, lastName, email, googleId, facebookId, gender } = user;
+  
+    await AsyncStorage.setItem('token', accessToken);
+    await AsyncStorage.setItem('userId', user._id);
+
+    trackEvent(EventTypes.Identify, {
+      traits: {
+        firstName,
+        lastName,
+        email,
+        googleId,
+        facebookId,
+        gender,
+      },
+    });
+
+    trackEvent(EventTypes.Track, {
+      event: 'Logged In',
+    });
+
+    history.push('/home');
+  }
+
   submit = async ({ email, password }) => {
-    const { history, logIn } = this.props;
+    const { logIn } = this.props;
 
     try {
-      const { data: { logIn: { token } } } = await logIn({ email, password });
+      const { data: { logIn: payload } } = await logIn({ email, password });
 
-      await AsyncStorage.setItem('token', token);
-
-      history.push('/home');
+      this.logInSuccess(payload);
     } catch (e) {
       console.log('TODO: LogIn error handling');
       console.log(e);
@@ -86,7 +111,7 @@ class LogIn extends Component {
   }
 
   signUpWithFacebook = async () => {
-    const { history, logInWithFacebook } = this.props;
+    const { logInWithFacebook } = this.props;
 
     try {
       const { credentials } = await facebook({
@@ -94,13 +119,11 @@ class LogIn extends Component {
         callback: `${config.FACEBOOK_NATIVE_CALLBACK}://authorize`,
       });
 
-      const { data: { logInWithFacebook: { accessToken } } } = await logInWithFacebook({
+      const { data: { logInWithFacebook: payload } } = await logInWithFacebook({
         accessToken: credentials.access_token,
       });
 
-      await AsyncStorage.setItem('token', accessToken);
-
-      history.push('/home');
+      this.logInSuccess(payload);
     } catch (e) {
       console.log('TODO: Facebook sign in error handling');
       console.log(e);
@@ -108,7 +131,7 @@ class LogIn extends Component {
   }
 
   signUpWithGoogle = async () => {
-    const { history, logInWithGoogle } = this.props;
+    const { logInWithGoogle } = this.props;
 
     try {
       const { credentials } = await google({
@@ -116,14 +139,12 @@ class LogIn extends Component {
         callback: `${config.GOOGLE_NATIVE_CALLBACK}:/oauth2redirect`
       });
 
-      const { data: { logInWithGoogle: { accessToken } } } = await logInWithGoogle({
+      const { data: { logInWithGoogle: payload} } = await logInWithGoogle({
         accessToken: credentials.access_token,
         refreshToken: credentials.refresh_token,
       });
 
-      await AsyncStorage.setItem('token', accessToken);
-
-      history.push('/home');
+      this.logInSuccess(payload);
     } catch (e) {
       console.log('TODO: Google sign in error handling');
       console.log(e);

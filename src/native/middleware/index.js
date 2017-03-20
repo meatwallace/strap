@@ -1,9 +1,10 @@
-import analytics from '@common/middleware';
+import config from 'react-native-config';
+import analytics from '@common/lib/analyticsMiddleware';
 import client from '../config/apollo';
 
 const middleware = [
   client.middleware(),
-  analytics,
+  analytics(config.SEGMENT_KEY),
 ];
 
 export default middleware;

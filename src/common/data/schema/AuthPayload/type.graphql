@@ -1,3 +1,4 @@
 type AuthPayload {
   accessToken: String
+  user: User
 }

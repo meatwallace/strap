@@ -1,6 +1,7 @@
 import { Component, PropTypes } from 'react';
 import ApolloClient from 'apollo-client';
 import { AsyncStorage } from 'react-native';
+import EventTypes from '@common/config/eventTypes';
 
 class LogOut extends Component {
   static propTypes = {
@@ -9,12 +10,17 @@ class LogOut extends Component {
   }
 
   async componentWillMount() {
-    const { client, history } = this.props;
+    const { client, history, trackEvent } = this.props;
 
     // Wipe Apollo's cache
     await client.resetStore();
 
     await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('userId');
+
+    trackEvent(EventTypes.Track, {
+      event: 'Logged Out',
+    });
 
     history.push('/login');
   }

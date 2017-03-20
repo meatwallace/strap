@@ -6,6 +6,7 @@ import { Strategy as GoogleTokenStrategy } from 'passport-google-token';
 import jwt from 'feathers-authentication-jwt';
 import local from 'feathers-authentication-local';
 import oauth2 from 'feathers-authentication-oauth2';
+import { addUserToResult } from '../../hooks';
 
 export default function auth() {
   const app = this;
@@ -58,5 +59,10 @@ export default function auth() {
         authentication.hooks.authenticate('jwt')
       ],
     },
+    after: {
+      create: [
+        addUserToResult(),
+      ]
+    }
   });
 }
