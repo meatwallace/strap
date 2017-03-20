@@ -3447,7 +3447,7 @@ feathers-errors@^2.0.1, feathers-errors@^2.2.0, feathers-errors@^2.4.0, feathers
   dependencies:
     debug "^2.2.0"
 
-feathers-hooks-common@^2.0.3:
+feathers-hooks-common@^2.0.2, feathers-hooks-common@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/feathers-hooks-common/-/feathers-hooks-common-2.0.3.tgz#e9f12abebdbc163f28d4cb4c85094e29aa24635d"
   dependencies:
@@ -3473,9 +3473,9 @@ feathers-mongoose@^5.0.3:
     lodash.omit "^4.3.0"
     uberproto "^1.2.0"
 
-feathers-permissions@^0.1.1:
+feathers-permissions@juanchoc/feathers-permissions#616d48c036dba045ad102c4f79f6248221269ceb:
   version "0.1.1"
-  resolved "https://registry.yarnpkg.com/feathers-permissions/-/feathers-permissions-0.1.1.tgz#d1a0e072fe3aec69fa1079b469cb9640b6243bb4"
+  resolved "https://codeload.github.com/juanchoc/feathers-permissions/tar.gz/616d48c036dba045ad102c4f79f6248221269ceb"
   dependencies:
     debug "^2.2.0"
     feathers-errors "^2.4.0"

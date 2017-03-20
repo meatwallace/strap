@@ -101,7 +101,7 @@
     "feathers-hooks": "^1.8.1",
     "feathers-hooks-common": "^2.0.3",
     "feathers-mongoose": "^5.0.3",
-    "feathers-permissions": "^0.1.1",
+    "feathers-permissions": "meatwallace/feathers-permissions#616d48c036dba045ad102c4f79f6248221269ceb",
     "feathers-rest": "^1.7.1",
     "feathers-socketio": "^1.5.2",
     "graphql": "^0.9.1",
