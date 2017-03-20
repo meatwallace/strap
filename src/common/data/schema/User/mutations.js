@@ -1,4 +1,4 @@
-import axios from '../../../config/axios';
+import axios from '../../../configs/axios';
 
 export default function mutations(app) {
   const Users = app.service('users');

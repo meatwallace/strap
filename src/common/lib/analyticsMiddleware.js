@@ -1,7 +1,7 @@
 import { get } from 'lodash';
 import { AsyncStorage } from 'react-native';
 import Analytics from './analytics';
-import EventTypes from '../config/eventTypes';
+import EventTypes from '../configs/eventTypes';
 
 export default function(key) {
   const analytics = new Analytics(key);

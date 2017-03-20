@@ -5,8 +5,8 @@ import { AppRegistry } from 'react-native';
 import { NativeRouter } from 'react-router-native';
 import { getTheme, StyleProvider } from 'native-base';
 import App from './components/App';
-import client from './config/apollo';
-import theme from './config/theme';
+import client from './configs/apollo';
+import theme from './configs/theme';
 import store from './store';
 
 console.disableYellowBox = true;

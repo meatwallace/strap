@@ -1,7 +1,7 @@
 import { Component, PropTypes } from 'react';
 import ApolloClient from 'apollo-client';
 import { AsyncStorage } from 'react-native';
-import EventTypes from '@common/config/eventTypes';
+import EventTypes from '@common/configs/eventTypes';
 
 class LogOut extends Component {
   static propTypes = {

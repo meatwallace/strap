@@ -6,7 +6,7 @@ import { Field } from 'redux-form';
 import { google, facebook } from 'react-native-simple-auth';
 import config from 'react-native-config';
 import variables from '@common/styles/variables';
-import EventTypes from '@common/config/eventTypes';
+import EventTypes from '@common/configs/eventTypes';
 import FullLayout from './Layouts/Full';
 import Input from './Input';
 import Badge from './Badge';

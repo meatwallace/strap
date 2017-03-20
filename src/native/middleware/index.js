@@ -1,6 +1,6 @@
 import config from 'react-native-config';
 import analytics from '@common/lib/analyticsMiddleware';
-import client from '../config/apollo';
+import client from '../configs/apollo';
 
 const middleware = [
   client.middleware(),
