@@ -1,31 +1,17 @@
 import React, { Component, PropTypes } from 'react';
 import { Button, Form, Icon, Text, View } from 'native-base';
 import { AsyncStorage } from 'react-native';
-import { Link } from 'react-router-native';
 import { Field } from 'redux-form';
 import { google, facebook } from 'react-native-simple-auth';
 import config from 'react-native-config';
 import variables from '@common/styles/variables';
-import FullLayout from './Layouts/Full';
 import Input from './Input';
-import Badge from './Badge';
 
 const { facebookBlue, googleRed } = variables;
 
 const styles = {
-  header: {
-    alignItems: 'center',
-    flex: 3,
-    justifyContent: 'center',
-  },
   content: {
     flex: 6,
-  },
-  footer: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    maxHeight: 30,
-    justifyContent: 'space-between',
   },
   social: {
     marginBottom: 5,
@@ -50,17 +36,10 @@ const styles = {
     maxWidth: 40,
     paddingLeft: 10,
   },
-  group: {
-    marginBottom: 5,
-    marginLeft: 0,
-  },
-  input: {
-
-  },
+  input: {},
   submit: {},
 };
 
-// TODO: Loading spinner for mutation
 
 class SignUp extends Component {
   static propTypes = {
@@ -136,73 +115,60 @@ class SignUp extends Component {
     const { handleSubmit, submitting } = this.props;
 
     return (
-      <FullLayout>
-        <View style={styles.header}>
-          <Badge />
-        </View>
-        <View style={styles.content}>
+      <View style={styles.content}>
+        <Button
+          full
+          iconLeft
+          style={{ ...styles.social, ...styles.facebook }}
+          onPress={this.signUpWithFacebook}
+        >
+          <Icon name="logo-facebook" color="#fff" />
+          <Text>Sign up with Facebook</Text>
+        </Button>
+        <Button
+          full
+          iconLeft
+          style={{ ...styles.social, ...styles.google }}
+          onPress={this.signUpWithGoogle}
+        >
+          <Icon name="logo-google" color="#fff" />
+          <Text>Sign up with Google</Text>
+        </Button>
+        <Text style={styles.divider}>OR</Text>
+        <Form style={styles.form}>
+          <Field
+            autoCapitalize="none"
+            autoCorrect={false}
+            component={Input}
+            icon="md-mail"
+            keyboardType="email-address"
+            name="email"
+            placeholder="Email"
+            returnKeyType="next"
+            styles={styles}
+          />
+          <Field
+            autoCapitalize="none"
+            autoCorrect={false}
+            component={Input}
+            icon="md-lock"
+            name="password"
+            secureTextEntry
+            placeholder="Password"
+            returnKeyType="go"
+            styles={styles}
+          />
           <Button
             full
-            iconLeft
-            style={{ ...styles.social, ...styles.facebook }}
-            onPress={this.signUpWithFacebook}
+            block
+            disabled={submitting}
+            onPress={handleSubmit(this.submit)}
+            style={styles.submit}
           >
-            <Icon name="logo-facebook" color="#fff" />
-            <Text>Sign up with Facebook</Text>
+            <Text>Sign up</Text>
           </Button>
-          <Button
-            full
-            iconLeft
-            style={{ ...styles.social, ...styles.google }}
-            onPress={this.signUpWithGoogle}
-          >
-            <Icon name="logo-google" color="#fff" />
-            <Text>Sign up with Google</Text>
-          </Button>
-          <Text style={styles.divider}>OR</Text>
-          <Form style={styles.form}>
-            <Field
-              autoCapitalize="none"
-              autoCorrect={false}
-              component={Input}
-              icon="md-mail"
-              keyboardType="email-address"
-              name="email"
-              placeholder="Email"
-              returnKeyType="next"
-              styles={styles}
-            />
-            <Field
-              autoCapitalize="none"
-              autoCorrect={false}
-              component={Input}
-              icon="md-lock"
-              name="password"
-              secureTextEntry
-              placeholder="Password"
-              returnKeyType="go"
-              styles={styles}
-            />
-            <Button
-              full
-              block
-              disabled={submitting}
-              onPress={handleSubmit(this.submit)}
-              style={styles.submit}
-            >
-              <Text>Sign up</Text>
-            </Button>
-          </Form>
-        </View>
-        <View style={styles.footer}>
-          <Link component={Button} dark small to="/login" transparent>
-            <Text light>LOG IN</Text>
-          </Link>
-          <Link component={Button} dark small to="/reset-password" transparent>
-            <Text light>RESET PASSWORD</Text>
-          </Link>
-        </View>
-      </FullLayout>
+        </Form>
+      </View>
     );
   }
 }

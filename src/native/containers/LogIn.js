@@ -1,4 +1,5 @@
-import { graphql, compose } from 'react-apollo';
+import { compose } from 'lodash/fp';
+import { graphql } from 'react-apollo';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-native';

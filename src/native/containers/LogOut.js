@@ -1,4 +1,5 @@
-import { compose, withApollo } from 'react-apollo';
+import { compose } from 'lodash/fp';
+import { withApollo } from 'react-apollo';
 import { withRouter } from 'react-router-native';
 import { connect } from 'react-redux';
 import { trackEvent } from '@common/actions';

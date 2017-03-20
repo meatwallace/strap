@@ -1,4 +1,5 @@
-import { compose, graphql } from 'react-apollo';
+import { compose } from 'lodash/fp';
+import { graphql } from 'react-apollo';
 import { reduxForm } from 'redux-form';
 import { withRouter } from 'react-router-native';
 import * as mutations from '@common/data/mutations';

@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react';
 import { Redirect, Route, Switch } from 'react-router-native';
 import { AsyncStorage } from 'react-native';
 import { View } from 'native-base';
-import SignUp from '../containers/SignUp';
-import LogIn from '../containers/LogIn';
+import Welcome from '../components/Welcome';
 import LogOut from '../containers/LogOut';
 import Home from './Home';
 
@@ -40,9 +39,8 @@ const App = () => (
       <AuthedRoute path="/logout" component={LogOut} />
 
       {/* Unauthed */}
-      <Route path="/signup" component={SignUp} />
-      <Route path="/login" component={LogIn} />
-      <Redirect to="/signup" />
+      <Route path="/welcome" component={Welcome} />
+      <Redirect to="/welcome" />
     </Switch>
 
     {/* Modals */}
