@@ -2,7 +2,7 @@ import { remove } from 'feathers-hooks-common';
 import { hooks as authHooks } from 'feathers-authentication';
 import { hooks as localHooks } from 'feathers-authentication-local';
 import { hooks as permHooks } from 'feathers-permissions';
-import { mergeGoogleProfile } from '../../../hooks';
+import { mergeGoogleProfile, trackSignUp } from '../../../hooks';
 
 const { authenticate } = authHooks;
 const { hashPassword } = localHooks;
@@ -51,6 +51,7 @@ export const after = {
   create: [
     setPermissions({ permissions: ['users:*:id'] }),
     setPermissions({ permissions: ['user'], field: 'roles' }),
+    trackSignUp(),
   ],
   update: [],
   patch: [],
