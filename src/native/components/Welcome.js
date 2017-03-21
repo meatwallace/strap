@@ -38,9 +38,11 @@ const ResetPasswordLink = () => (<FooterLink to="/welcome/reset-password" label=
 
 const Welcome = () => (
   <FullLayout>
-    <View style={styles.header}>
-      <Badge />
-    </View>
+    <Route path="/welcome/signup" children={({ match }) => (
+      <View style={styles.header}>
+        <Badge large={!match} />
+      </View>
+    )} />
     {/* Content */}
     <Switch>
       <Route path="/welcome/signup" component={SignUp} />
