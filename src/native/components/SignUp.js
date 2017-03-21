@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { Field } from 'redux-form';
 import { google, facebook } from 'react-native-simple-auth';
 import config from 'react-native-config';
+import { get } from 'lodash';
 import EventTypes from '@common/configs/eventTypes';
 import variables from '@common/styles/variables';
 import Input from './Input';
@@ -31,7 +32,10 @@ const styles = {
     flex: 1,
     alignItems: 'stretch',
   },
-  submit: {},
+  submit: {
+    marginBottom: 5,
+  },
+  error: {},
 };
 
 
@@ -44,6 +48,10 @@ class SignUp extends Component {
     signUp: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
     trackEvent: PropTypes.func.isRequired,
+  }
+
+  state = {
+    error: null,
   }
 
   logInSuccess = async (payload) => {
@@ -80,8 +88,7 @@ class SignUp extends Component {
 
       await this.logInSuccess(payload);
     } catch (e) {
-      console.log('TODO: SignUp error handling');
-      console.log(e);
+      this.handleGraphQLError(e);
     }
   }
 
@@ -100,8 +107,7 @@ class SignUp extends Component {
 
       await this.logInSuccess(payload);
     } catch (e) {
-      console.log('TODO: Facebook sign in error handling');
-      console.log(e);
+      this.handleGraphQLError(e);
     }
   }
 
@@ -121,13 +127,19 @@ class SignUp extends Component {
 
       await this.logInSuccess(payload);
     } catch (e) {
-      console.log('TODO: Google sign in error handling');
-      console.log(e);
+      this.handleGraphQLError(e);
     }
+  }
+
+  handleGraphQLError(e) {
+    const error = get(e, 'graphQLErrors.[0].message', 'An error has occured. Please try again');
+
+    this.setState({ error });
   }
 
   render() {
     const { handleSubmit, submitting } = this.props;
+    const { error } = this.state;
 
     return (
       <View style={styles.content}>
@@ -180,6 +192,7 @@ class SignUp extends Component {
           >
             <Text light>Sign up</Text>
           </Button>
+          { error && <Text light style={styles.error}>{error}</Text> }
         </View>
       </View>
     );
