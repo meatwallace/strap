@@ -3,12 +3,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer as HotReload } from 'react-hot-loader';
 import { ApolloProvider } from 'react-apollo';
+import Raven from 'raven-js';
 import history from '@common/configs/history';
 import getRootNode from '@common/lib/getRootNode';
 import client from './configs/apollo';
 import reducer from './reducers';
 import App from './components/App';
 import store from './store';
+
+Raven.config(process.env.SENTRY_DSN).install();
 
 const render = () => {
   ReactDOM.render(
