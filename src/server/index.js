@@ -6,6 +6,7 @@ import hooks from 'feathers-hooks';
 import rest from 'feathers-rest';
 import socketio from 'feathers-socketio';
 import fetch from 'node-fetch';
+import Raven from 'raven';
 import middleware from './middleware';
 import services from './services';
 
@@ -13,12 +14,15 @@ const appName = process.env.APP_NAME;
 const host = process.env.HOST;
 const port = process.env.PORT;
 
-// Polyfill fetch
-global.fetch = fetch;
+global.fetch = fetch; // Polyfill
+
+Raven.config(process.env.SENTRY_DSN).install();
 
 const app = feathers();
 
 app
+  .use(Raven.requestHandler())
+  .use(Raven.errorHandler())
   .use(compress())
   .options('*', cors())
   .use(cors())
