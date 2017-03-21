@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Text, View } from 'native-base';
+import { Text, View } from 'react-native';
 
 const styles = {
   content: {

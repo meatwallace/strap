@@ -1,13 +1,15 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Form, Icon, Text, View } from 'native-base';
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Field } from 'redux-form';
 import { google, facebook } from 'react-native-simple-auth';
 import config from 'react-native-config';
 import variables from '@common/styles/variables';
 import Input from './Input';
+import Text from './Text';
+import Button from './Button';
 
-const { facebookBlue, googleRed } = variables;
+const { facebookBlue, googleRed, primary } = variables;
 
 const styles = {
   content: {
@@ -16,27 +18,18 @@ const styles = {
   social: {
     marginBottom: 5,
   },
-  facebook: {
-    backgroundColor: facebookBlue,
-  },
-  google: {
-    backgroundColor: googleRed,
+  socialIcon: {
+    fontSize: 24,
+    marginRight: 10,
   },
   divider: {
     alignSelf: 'center',
-    color: '#777',
     marginBottom: 5,
   },
   form: {
+    flex: 1,
     alignItems: 'stretch',
   },
-  icon: {
-    color: '#777',
-    flex: 1,
-    maxWidth: 40,
-    paddingLeft: 10,
-  },
-  input: {},
   submit: {},
 };
 
@@ -118,24 +111,24 @@ class SignUp extends Component {
       <View style={styles.content}>
         <Button
           full
-          iconLeft
-          style={{ ...styles.social, ...styles.facebook }}
+          color={facebookBlue}
           onPress={this.signUpWithFacebook}
+          style={styles.social}
         >
-          <Icon name="logo-facebook" color="#fff" />
-          <Text>Sign up with Facebook</Text>
+          <Icon name="logo-facebook" color="#fff" style={styles.socialIcon} />
+          <Text light>Sign up with Facebook</Text>
         </Button>
         <Button
           full
-          iconLeft
-          style={{ ...styles.social, ...styles.google }}
+          color={googleRed}
           onPress={this.signUpWithGoogle}
+          style={styles.social}
         >
-          <Icon name="logo-google" color="#fff" />
-          <Text>Sign up with Google</Text>
+          <Icon name="logo-google" color="#fff" style={styles.socialIcon} />
+          <Text light>Sign up with Google</Text>
         </Button>
         <Text style={styles.divider}>OR</Text>
-        <Form style={styles.form}>
+        <View style={styles.form}>
           <Field
             autoCapitalize="none"
             autoCorrect={false}
@@ -145,7 +138,6 @@ class SignUp extends Component {
             name="email"
             placeholder="Email"
             returnKeyType="next"
-            styles={styles}
           />
           <Field
             autoCapitalize="none"
@@ -156,18 +148,17 @@ class SignUp extends Component {
             secureTextEntry
             placeholder="Password"
             returnKeyType="go"
-            styles={styles}
           />
           <Button
             full
-            block
             disabled={submitting}
             onPress={handleSubmit(this.submit)}
             style={styles.submit}
+            color={primary}
           >
-            <Text>Sign up</Text>
+            <Text light>Sign up</Text>
           </Button>
-        </Form>
+        </View>
       </View>
     );
   }

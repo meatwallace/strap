@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Redirect, Route, Switch } from 'react-router-native';
-import { AsyncStorage } from 'react-native';
-import { View } from 'native-base';
+import { AsyncStorage, View } from 'react-native';
 import Welcome from '../components/Welcome';
 import LogOut from '../containers/LogOut';
 import Home from './Home';
@@ -28,8 +27,6 @@ AuthedRoute.propTypes = {
   component: PropTypes.func.isRequired,
 }
 
-// TODO: Remove excessive code duplication in login/signup pages by either merging
-// or getting logic out into actions
 const App = () => (
   <View style={styles.container}>
     {/* Routes */}

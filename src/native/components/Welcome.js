@@ -1,18 +1,15 @@
 import React, { PropTypes } from 'react';
-import { Button, Text, View } from 'native-base';
+import { View } from 'react-native';
 import { Link, Redirect, Route, Switch } from 'react-router-native';
 import FullLayout from './Layouts/Full';
-import Badge from './Badge';
+import WelcomeHeader from './WelcomeHeader';
+import Button from './Button';
+import Text from './Text';
 import LogIn from '../containers/LogIn';
 import SignUp from '../containers/SignUp';
 import ResetPassword from '../containers/ResetPassword';
 
 const styles = {
-  header: {
-    alignItems: 'center',
-    flex: 3,
-    justifyContent: 'center',
-  },
   footer: {
     alignItems: 'flex-end',
     flexDirection: 'row',
@@ -22,7 +19,7 @@ const styles = {
 };
 
 const FooterLink = ({ to, label }) => (
-  <Link component={Button} dark small to={to} transparent>
+  <Link component={Button} to={to}>
     <Text light>{label}</Text>
   </Link>
 );
@@ -39,9 +36,7 @@ const ResetPasswordLink = () => (<FooterLink to="/welcome/reset-password" label=
 const Welcome = () => (
   <FullLayout>
     <Route path="/welcome/signup" children={({ match }) => (
-      <View style={styles.header}>
-        <Badge large={!match} />
-      </View>
+      <WelcomeHeader large={!match} />
     )} />
     {/* Content */}
     <Switch>
