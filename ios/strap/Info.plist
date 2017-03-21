@@ -21,7 +21,7 @@
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>FacebookAppID</key>
-    <string>1803893939861286</string>
+    <string>__RN_CONFIG_FACEBOOK_NATIVE_APP_ID</string>
     <key>FacebookDisplayName</key>
     <string>strap</string>
     <key>LSApplicationQueriesSchemes</key>
@@ -38,7 +38,7 @@
         <string>Facebook</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>fb1803893939861286</string>
+          <string>__RN_CONFIG_FACEBOOK_NATIVE_SCHEME</string>
         </array>
       </dict>
       <dict>
@@ -48,7 +48,7 @@
         <string>Google</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.googleusercontent.apps.856839298791-b34dq123a5l2rmnp2vbaudftk8oaqovp</string>
+          <string>__RN_CONFIG_GOOGLE_NATIVE_SCHEME</string>
         </array>
       </dict>
     </array>
