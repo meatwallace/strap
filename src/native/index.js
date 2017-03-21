@@ -12,7 +12,7 @@ import store from './store';
 
 // Initialize Sentry error reporting
 RavenRNPlugin(Raven);
-Raven.config(config.SENTRY_DSN, { release: config.RELEASE_ID });
+Raven.config(config.SENTRY_DSN, { release: config.RELEASE_ID }).install();
 
 console.disableYellowBox = true;
 
