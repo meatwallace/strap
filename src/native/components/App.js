@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-native';
-import { AsyncStorage, View } from 'react-native';
-import Welcome from '../components/Welcome';
+import { View } from 'react-native';
+import Welcome from './Welcome';
+import AuthedRoute from './AuthedRoute';
 import LogOut from '../containers/LogOut';
 import Home from './Home';
 
@@ -10,22 +11,6 @@ const styles = {
     flex: 1,
   },
 };
-
-const isAuthenticated = () => AsyncStorage.getItem('token');
-
-const AuthedRoute = ({ component, ...rest }) => (
-  <Route {...rest} render={(props) => {
-    if (isAuthenticated) {
-      return React.createElement(component, props);
-    }
-
-    return (<Redirect to="/login" />);
-  }} />
-);
-
-AuthedRoute.propTypes = {
-  component: PropTypes.func.isRequired,
-}
 
 const App = () => (
   <View style={styles.container}>
