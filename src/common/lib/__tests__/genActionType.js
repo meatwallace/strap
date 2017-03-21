@@ -9,8 +9,6 @@ describe('genActionType', () => {
     const module = 'module';
     const action = 'ACTION';
 
-    process.env.APP_NAME = 'test';
-
-    expect(genActionType(module, action)).toBe(`test/${module}/${action}`);
+    expect(genActionType(module, action)).toBe(`${module}/${action}`);
   });
 });

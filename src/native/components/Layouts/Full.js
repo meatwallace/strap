@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react';
-import { View } from 'native-base';
+import { View } from 'react-native';
+import variables from '@common/styles/variables';
+
+const { accent } = variables;
 
 const styles = {
   container: {
+    backgroundColor: accent,
     flex: 1,
     flexDirection: 'column',
     padding: 20,

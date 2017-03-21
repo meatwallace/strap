@@ -1,7 +1,10 @@
-import { compose, graphql } from 'react-apollo';
+import { compose } from 'lodash/fp';
+import { graphql } from 'react-apollo';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-native';
 import * as mutations from '@common/data/mutations';
+import { trackEvent } from '@common/actions';
 import validate from 'validate.js';
 import SignUp from '../components/SignUp';
 
@@ -19,8 +22,15 @@ const constraints = {
   },
 };
 
+export function mapStateToProps(state, ownProps) {
+  return {};
+}
+
+const actions = { trackEvent };
+
 export default compose(
   withRouter,
+  connect(mapStateToProps, actions),
   graphql(signUp, {
     props: ({ mutate }) => ({
       signUp: ({ email, password }) => mutate({ variables: { email, password } }),
@@ -28,14 +38,10 @@ export default compose(
   }),
   graphql(logInWithFacebook, {
     props: ({ mutate }) => ({
-      logInWithFacebook: ({ accessToken, email, facebookId, firstName, lastName, refreshToken }) =>
+      logInWithFacebook: ({ accessToken, refreshToken }) =>
         mutate({
           variables: {
             accessToken,
-            email,
-            facebookId,
-            firstName,
-            lastName,
             refreshToken,
           },
         }),
@@ -43,14 +49,10 @@ export default compose(
   }),
   graphql(logInWithGoogle, {
     props: ({ mutate }) => ({
-      logInWithGoogle: ({ accessToken, email, googleId, firstName, lastName, refreshToken }) =>
+      logInWithGoogle: ({ accessToken, refreshToken }) =>
         mutate({
           variables: {
             accessToken,
-            email,
-            googleId,
-            firstName,
-            lastName,
             refreshToken,
           },
         }),

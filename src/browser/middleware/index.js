@@ -1,7 +1,7 @@
 import createLogger from 'redux-logger';
 import { routerMiddleware } from 'react-router-redux';
-import history from '@common/config/history';
-import client from '@common/config/apollo';
+import history from '../configs/history';
+import client from '../configs/apollo';
 
 const middleware = [
   routerMiddleware(history),

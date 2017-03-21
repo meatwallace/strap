@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'native-base';
+import { View } from 'react-native';
 import NavItem from './NavItem';
 
 const NAV_TYPES = {

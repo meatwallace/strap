@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router-native';
-import { Button, Icon, Text } from 'native-base';
+import { TouchableOpacity, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const styles = {
   button: {
@@ -20,7 +21,7 @@ const styles = {
 
 const NavItem = ({ icon, label, to }) => (
   <Link
-    component={Button}
+    component={TouchableOpacity}
     light
     outline
     style={styles.button}

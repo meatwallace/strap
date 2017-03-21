@@ -1,5 +1,1 @@
-const actions = {
-
-};
-
-export default actions;
+export * from './analytics';

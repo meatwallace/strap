@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { View } from 'native-base';
+import { View } from 'react-native';
 import Header from '../Header';
 import Navigation from '../Navigation';
 

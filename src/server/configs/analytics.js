@@ -1,3 +1,3 @@
-import Analytics from 'analytics-react-native';
+import Analytics from '@common/lib/analytics';
 
 export default new Analytics(process.env.SEGMENT_KEY);

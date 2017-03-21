@@ -5,6 +5,8 @@ type User {
   email: String
   firstName: String
   lastName: String
+  gender: String
+  roles: [String]
 
   createdAt: String!
   updatedAt: String

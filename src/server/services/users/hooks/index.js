@@ -1,48 +1,58 @@
-import hooks from 'feathers-hooks';
-import { hooks as auth } from 'feathers-authentication';
-// import globalHooks from '../../../hooks';
+import { remove } from 'feathers-hooks-common';
+import { hooks as authHooks } from 'feathers-authentication';
+import { hooks as localHooks } from 'feathers-authentication-local';
+import { hooks as permHooks } from 'feathers-permissions';
+import { mergeGoogleProfile, trackSignUp } from '../../../hooks';
+
+const { authenticate } = authHooks;
+const { hashPassword } = localHooks;
+const { checkPermissions, setPermissions, isPermitted } = permHooks;
 
 export const before = {
   all: [],
   find: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
+    authenticate('jwt'),
   ],
   get: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: '_id' }),
+    authenticate('jwt'),
   ],
   create: [
-    auth.hashPassword(),
+    hashPassword(),
+    mergeGoogleProfile(),
   ],
   update: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: '_id' }),
+    authenticate('jwt'),
+    checkPermissions({ service: 'users' }),
+    checkPermissions({ roles: ['admin'] }),
+    isPermitted(),
+    mergeGoogleProfile(),
   ],
   patch: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: '_id' }),
+    authenticate('jwt'),
+    checkPermissions({ service: 'users' }),
+    checkPermissions({ roles: ['admin'] }),
+    isPermitted(),
+    mergeGoogleProfile(),
   ],
   remove: [
-    auth.verifyToken(),
-    auth.populateUser(),
-    auth.restrictToAuthenticated(),
-    auth.restrictToOwner({ ownerField: '_id' }),
+    authenticate('jwt'),
+    checkPermissions({ service: 'users' }),
+    checkPermissions({ roles: ['admin'] }),
+    isPermitted(),
   ],
 };
 
 export const after = {
-  all: [hooks.remove('password')],
+  all: [
+    remove('password'),
+  ],
   find: [],
   get: [],
-  create: [],
+  create: [
+    setPermissions({ permissions: ['users:*:id'] }),
+    setPermissions({ permissions: ['user'], field: 'roles' }),
+    trackSignUp(),
+  ],
   update: [],
   patch: [],
   remove: [],

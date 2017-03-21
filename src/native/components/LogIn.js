@@ -1,63 +1,41 @@
 import React, { Component, PropTypes } from 'react';
-import { Button, Form, Icon, Text, View } from 'native-base';
-import { AsyncStorage } from 'react-native';
-import { Link } from 'react-router-native';
+import { AsyncStorage, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { Field } from 'redux-form';
 import { google, facebook } from 'react-native-simple-auth';
 import config from 'react-native-config';
+import { get } from 'lodash';
 import variables from '@common/styles/variables';
-import FullLayout from './Layouts/Full';
+import EventTypes from '@common/configs/eventTypes';
 import Input from './Input';
-import Badge from './Badge';
+import Button from './Button';
+import Text from './Text';
 
-const { facebookBlue, googleRed } = variables;
+const { facebookBlue, googleRed, primary } = variables;
 
 const styles = {
-  header: {
-    alignItems: 'center',
-    flex: 3,
-    justifyContent: 'center',
-  },
   content: {
     flex: 6,
-  },
-  footer: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    maxHeight: 30,
-    justifyContent: 'space-between',
   },
   social: {
     marginBottom: 5,
   },
-  facebook: {
-    backgroundColor: facebookBlue,
-  },
-  google: {
-    backgroundColor: googleRed,
+  socialIcon: {
+    fontSize: 24,
+    marginRight: 10,
   },
   divider: {
     alignSelf: 'center',
-    color: '#777',
     marginBottom: 5,
   },
   form: {
+    flex: 1,
     alignItems: 'stretch',
   },
-  icon: {
-    color: '#777',
-    flex: 1,
-    maxWidth: 40,
-    paddingLeft: 10,
-  },
-  group: {
+  submit: {
     marginBottom: 5,
-    marginLeft: 0,
   },
-  input: {
-
-  },
-  submit: {},
+  error: {},
 };
 
 class LogIn extends Component {
@@ -68,147 +46,154 @@ class LogIn extends Component {
     logInWithGoogle: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
+    trackEvent: PropTypes.func.isRequired,
+  }
+
+  state = {
+    error: null,
+  }
+
+  logInSuccess = async (payload) => {
+    const { history, trackEvent } = this.props;
+    const { accessToken, user } = payload;
+    const { firstName, lastName, email, googleId, facebookId, gender } = user;
+  
+    await AsyncStorage.setItem('token', accessToken);
+    await AsyncStorage.setItem('userId', user._id);
+
+    trackEvent(EventTypes.Identify, {
+      traits: {
+        firstName,
+        lastName,
+        email,
+        googleId,
+        facebookId,
+        gender,
+      },
+    });
+
+    trackEvent(EventTypes.Track, {
+      event: 'Logged In',
+    });
+
+    history.push('/home');
   }
 
   submit = async ({ email, password }) => {
-    const { history, logIn } = this.props;
+    const { logIn } = this.props;
 
     try {
-      const { data: { logIn: { token } } } = await logIn({ email, password });
+      const { data: { logIn: payload } } = await logIn({ email, password });
 
-      await AsyncStorage.setItem('token', token);
-
-      history.push('/home');
+      this.logInSuccess(payload);
     } catch (e) {
-      console.log('TODO: LogIn error handling');
-      console.log(e);
+      this.handleGraphQLError(e);
     }
   }
 
   signUpWithFacebook = async () => {
-    const { history, logInWithFacebook } = this.props;
+    const { logInWithFacebook } = this.props;
 
     try {
-      const { user, credentials } = await facebook({
+      const { credentials } = await facebook({
         appId: config.FACEBOOK_NATIVE_APP_ID,
         callback: `${config.FACEBOOK_NATIVE_CALLBACK}://authorize`,
       });
 
-      const { data: { logInWithFacebook: { token } } } = await logInWithFacebook({
-        email: user.email,
-        facebookId: user.id,
-        firstName: user.first_name,
-        lastName: user.last_name,
+      const { data: { logInWithFacebook: payload } } = await logInWithFacebook({
         accessToken: credentials.access_token,
       });
 
-      await AsyncStorage.setItem('token', token);
-
-      history.push('/home');
+      this.logInSuccess(payload);
     } catch (e) {
-      console.log('TODO: Facebook sign in error handling');
-      console.log(e);
+      this.handleGraphQLError(e);
     }
   }
 
   signUpWithGoogle = async () => {
-    const { history, logInWithGoogle } = this.props;
+    const { logInWithGoogle } = this.props;
 
     try {
-      const { user, credentials } = await google({
+      const { credentials } = await google({
         appId: config.GOOGLE_NATIVE_APP_ID,
         callback: `${config.GOOGLE_NATIVE_CALLBACK}:/oauth2redirect`
       });
 
-      const { data: { logInWithGoogle: { token } } } = await logInWithGoogle({
-        email: user.email,
-        googleId: user.id,
-        firstName: user.given_name,
-        lastName: user.family_name,
+      const { data: { logInWithGoogle: payload} } = await logInWithGoogle({
         accessToken: credentials.access_token,
         refreshToken: credentials.refresh_token,
       });
 
-      await AsyncStorage.setItem('token', token);
-
-      history.push('/home');
+      this.logInSuccess(payload);
     } catch (e) {
-      console.log('TODO: Google sign in error handling');
-      console.log(e);
+      this.handleGraphQLError(e);
     }
+  }
+
+  handleGraphQLError(e) {
+    const error = get(e, 'graphQLErrors.[0].message', 'An error has occured. Please try again');
+
+    this.setState({ error });
   }
 
   render() {
     const { handleSubmit, submitting } = this.props;
+    const { error } = this.state;
 
     return (
-      <FullLayout>
-        <View style={styles.header}>
-          <Badge />
-        </View>
-        <View style={styles.content}>
+      <View style={styles.content}>        
+        <Button
+          full
+          color={facebookBlue}
+          onPress={this.signUpWithFacebook}
+          style={styles.social}
+        >
+          <Icon name="logo-facebook" color="#fff" style={styles.socialIcon} />
+          <Text light>Log in with Facebook</Text>
+        </Button>
+        <Button
+          full
+          color={googleRed}
+          onPress={this.signUpWithGoogle}
+          style={styles.social}
+        >
+          <Icon name="logo-google" color="#fff" style={styles.socialIcon} />
+          <Text light>Log in with Google</Text>
+        </Button>
+        <Text light style={styles.divider}>OR</Text>
+        <View style={styles.form}>
+          <Field
+            autoCapitalize="none"
+            autoCorrect={false}
+            component={Input}
+            icon="md-mail"
+            keyboardType="email-address"
+            name="email"
+            placeholder="Email"
+            returnKeyType="next"
+          />
+          <Field
+            autoCapitalize="none"
+            autoCorrect={false}
+            component={Input}
+            icon="md-lock"
+            name="password"
+            secureTextEntry
+            placeholder="Password"
+            returnKeyType="go"
+          />
           <Button
             full
-            iconLeft
-            style={{ ...styles.social, ...styles.facebook }}
-            onPress={this.signUpWithFacebook}
+            color={primary}
+            disabled={submitting}
+            onPress={handleSubmit(this.submit)}
+            style={styles.submit}
           >
-            <Icon name="logo-facebook" color="#fff" />
-            <Text>Log in with Facebook</Text>
+            <Text light>Log in</Text>
           </Button>
-          <Button
-            full
-            iconLeft
-            style={{ ...styles.social, ...styles.google }}
-            onPress={this.signUpWithGoogle}
-          >
-            <Icon name="logo-google" color="#fff" />
-            <Text>Log in with Google</Text>
-          </Button>
-          <Text style={styles.divider}>OR</Text>
-          <Form style={styles.form}>
-            <Field
-              autoCapitalize="none"
-              autoCorrect={false}
-              component={Input}
-              icon="md-mail"
-              keyboardType="email-address"
-              name="email"
-              placeholder="Email"
-              returnKeyType="next"
-              styles={styles}
-            />
-            <Field
-              autoCapitalize="none"
-              autoCorrect={false}
-              component={Input}
-              icon="md-lock"
-              name="password"
-              secureTextEntry
-              placeholder="Password"
-              returnKeyType="go"
-              styles={styles}
-            />
-            <Button
-              full
-              block
-              disabled={submitting}
-              onPress={handleSubmit(this.submit)}
-              style={styles.submit}
-            >
-              <Text>Log in</Text>
-            </Button>
-          </Form>
+          { error && <Text light style={styles.error}>{error}</Text> }
         </View>
-        <View style={styles.footer}>
-          <Link component={Button} dark small to="/signup" transparent>
-            <Text light>SIGN UP</Text>
-          </Link>
-          <Link component={Button} dark small to="/reset-password" transparent>
-            <Text light>RESET PASSWORD</Text>
-          </Link>
-        </View>
-      </FullLayout>
+      </View>
     );
   }
 }
