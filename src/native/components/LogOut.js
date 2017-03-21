@@ -12,15 +12,14 @@ class LogOut extends Component {
   async componentWillMount() {
     const { client, history, trackEvent } = this.props;
 
-    // Wipe Apollo's cache
-    await client.resetStore();
-
-    await AsyncStorage.removeItem('token');
-    await AsyncStorage.removeItem('userId');
-
     trackEvent(EventTypes.Track, {
       event: 'Logged Out',
     });
+  
+    // Wipe Apollo's cache & our storage
+    await client.resetStore();  
+    await AsyncStorage.removeItem('token');
+    await AsyncStorage.removeItem('userId');
 
     history.push('/login');
   }

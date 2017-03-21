@@ -42,6 +42,7 @@ class LogIn extends Component {
     logInWithGoogle: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired,
     submitting: PropTypes.bool.isRequired,
+    trackEvent: PropTypes.func.isRequired,
   }
 
   logInSuccess = async (payload) => {

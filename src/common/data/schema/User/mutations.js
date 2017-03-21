@@ -6,6 +6,7 @@ export default function mutations(app) {
   return {
     async signUp(root, { email, password }, context) {
       await Users.create({ email, password });
+  
       const result = await axios.post('/authentication', { email, password });
 
       return result.data;

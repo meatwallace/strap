@@ -1,8 +1,10 @@
 import { compose } from 'lodash/fp';
 import { graphql } from 'react-apollo';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-native';
 import * as mutations from '@common/data/mutations';
+import { trackEvent } from '@common/actions';
 import validate from 'validate.js';
 import SignUp from '../components/SignUp';
 
@@ -20,8 +22,15 @@ const constraints = {
   },
 };
 
+export function mapStateToProps(state, ownProps) {
+  return {};
+}
+
+const actions = { trackEvent };
+
 export default compose(
   withRouter,
+  connect(mapStateToProps, actions),
   graphql(signUp, {
     props: ({ mutate }) => ({
       signUp: ({ email, password }) => mutate({ variables: { email, password } }),
