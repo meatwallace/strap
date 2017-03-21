@@ -3,9 +3,16 @@ import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { AppRegistry } from 'react-native';
 import { NativeRouter } from 'react-router-native';
+import config from 'react-native-config';
+import Raven from 'raven-js';
+import RavenRNPlugin from 'raven-js/plugins/react-native';
 import App from './components/App';
 import client from './configs/apollo';
 import store from './store';
+
+// Initialize Sentry error reporting
+RavenRNPlugin(Raven);
+Raven.config(config.SENTRY_DSN, { release: config.RELEASE_ID });
 
 console.disableYellowBox = true;
 

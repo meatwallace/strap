@@ -16,7 +16,8 @@ GOOGLE_NATIVE_APP_ID=856839298791-b34dq123a5l2rmnp2vbaudftk8oaqovp.apps.googleus
 GOOGLE_NATIVE_CALLBACK=com.googleusercontent.apps.856839298791-b34dq123a5l2rmnp2vbaudftk8oaqovp:/oauth2redirect
 
 # API KEYS
-SEGMENT_KEY=
+SEGMENT_KEY=TxCSib6oeh3ctloDiIne6TSxQkkdvOxs
+SENTRY_DSN=https://74ef5ee648314c1298096308b889ba1f@sentry.io/149617
 
 ##################################
 # PRIVATE - DO NOT include in CI #
