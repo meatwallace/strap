@@ -112,7 +112,7 @@
     "jsonwebtoken": "^7.3.0",
     "lodash": "^4.17.4",
     "mongoose": "^4.8.6",
-    "node-fetch": "^1.6.3",
+    "node-fetch": "^1.7.0",
     "passport": "^0.3.2",
     "passport-facebook": "2.1.1",
     "passport-facebook-token": "3.3.0",
