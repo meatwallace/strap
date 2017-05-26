@@ -71,7 +71,7 @@
     "request": "^2.80.0",
     "sinon": "^2.0.0",
     "style-loader": "^0.15.0",
-    "stylefmt": "^5.2.0",
+    "stylefmt": "^6.0.0",
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
     "stylelint-order": "0.4.1",
