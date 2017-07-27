@@ -118,7 +118,7 @@
     "passport-facebook-token": "3.3.0",
     "passport-google-oauth20": "1.0.0",
     "passport-google-token": "0.1.2",
-    "raven": "^1.2.0",
+    "raven": "^2.1.1",
     "raven-js": "^3.12.1",
     "react": "^15.4.2",
     "react-apollo": "^1.0.0-rc.2",
