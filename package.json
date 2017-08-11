@@ -113,7 +113,7 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.8.6",
     "node-fetch": "^1.6.3",
-    "passport": "^0.3.2",
+    "passport": "^0.4.0",
     "passport-facebook": "2.1.1",
     "passport-facebook-token": "3.3.0",
     "passport-google-oauth20": "1.0.0",
