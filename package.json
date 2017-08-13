@@ -121,7 +121,7 @@
     "raven": "^1.2.0",
     "raven-js": "^3.12.1",
     "react": "^15.4.2",
-    "react-apollo": "^1.0.0-rc.2",
+    "react-apollo": "^1.4.14",
     "react-dom": "^15.4.2",
     "react-helmet": "^4.0.0",
     "react-native": "^0.42.0",
