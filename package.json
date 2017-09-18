@@ -111,7 +111,7 @@
     "history": "^4.6.0",
     "jsonwebtoken": "^7.3.0",
     "lodash": "^4.17.4",
-    "mongoose": "^4.8.6",
+    "mongoose": "^4.11.12",
     "node-fetch": "^1.6.3",
     "passport": "^0.3.2",
     "passport-facebook": "2.1.1",
