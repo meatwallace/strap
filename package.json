@@ -98,7 +98,7 @@
     "feathers-authentication-oauth2": "^0.2.3",
     "feathers-configuration": "^0.4.1",
     "feathers-errors": "^2.6.1",
-    "feathers-hooks": "^1.8.1",
+    "feathers-hooks": "^2.0.4",
     "feathers-hooks-common": "^2.0.3",
     "feathers-mongoose": "^5.0.3",
     "feathers-permissions": "meatwallace/feathers-permissions#616d48c036dba045ad102c4f79f6248221269ceb",
