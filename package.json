@@ -104,7 +104,7 @@
     "feathers-permissions": "meatwallace/feathers-permissions#616d48c036dba045ad102c4f79f6248221269ceb",
     "feathers-rest": "^1.7.1",
     "feathers-socketio": "^1.5.2",
-    "graphql": "^0.9.1",
+    "graphql": "^0.11.4",
     "graphql-server-express": "^0.6.0",
     "graphql-tag": "^1.3.1",
     "graphql-tools": "^0.10.1",
