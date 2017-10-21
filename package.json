@@ -85,7 +85,7 @@
   "dependencies": {
     "analytics-react-native": "^1.1.0",
     "apollo-client": "^1.0.0-rc.1",
-    "axios": "^0.15.3",
+    "axios": "^0.17.0",
     "babel-polyfill": "^6.23.0",
     "bcrypt-as-promised": "^1.1.0",
     "body-parser": "^1.17.1",
