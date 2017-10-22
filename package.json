@@ -83,7 +83,7 @@
     "webpack-merge": "^4.0.0"
   },
   "dependencies": {
-    "analytics-react-native": "^1.1.0",
+    "analytics-react-native": "^1.2.0",
     "apollo-client": "^1.0.0-rc.1",
     "axios": "^0.15.3",
     "babel-polyfill": "^6.23.0",
