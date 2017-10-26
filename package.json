@@ -75,7 +75,7 @@
     "stylelint": "^7.9.0",
     "stylelint-config-standard": "^16.0.0",
     "stylelint-order": "0.4.1",
-    "svg-url-loader": "^2.0.2",
+    "svg-url-loader": "^2.3.0",
     "url-loader": "^0.5.8",
     "webpack": "^2.2.1",
     "webpack-bundle-analyzer": "^2.3.1",
