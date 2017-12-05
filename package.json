@@ -125,7 +125,7 @@
     "react-dom": "^15.4.2",
     "react-helmet": "^4.0.0",
     "react-native": "^0.42.0",
-    "react-native-config": "^0.3.1",
+    "react-native-config": "^0.11.1",
     "react-native-simple-auth": "2.0.0",
     "react-native-vector-icons": "^4.0.0",
     "react-redux": "^5.0.3",
